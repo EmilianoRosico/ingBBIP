@@ -1,5 +1,5 @@
 module.exports = (sequelize, dataTypes) => {
-    const Ports = sequelize.define('Ports', {
+    const Ports = sequelize.define('ports', {
         id: {
             autoIncrement: true,
             primaryKey: true,
@@ -58,8 +58,8 @@ module.exports = (sequelize, dataTypes) => {
         paranoid: true,
     })
     Ports.associate = function(models) {
-        Ports.belongsTo(models.Devices, {
-            as: "DevicePorts",
+        Ports.belongsTo(models.devices, {
+            as: "devicePorts",
             foreignKey: "deviceId"
         })
     }

@@ -1,5 +1,5 @@
 module.exports = (sequelize, dataTypes) => {
-    const User = sequelize.define('Users', {
+    const User = sequelize.define('users', {
         id: {
             autoIncrement: true,
             primaryKey: true,
@@ -20,7 +20,7 @@ module.exports = (sequelize, dataTypes) => {
     }, {
         paranoid: true,
     })
-    User.associate = function (models) {
+    User.associate = function(models) {
 
     }
     return User;

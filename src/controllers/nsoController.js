@@ -4,7 +4,7 @@ const request = require('request');
 module.exports = {
     devices: async(req, res) => {
         try {
-            const nodes = await db.Nodes.findAll()
+            const nodes = await db.nodes.findAll()
             res.render('../views/nodes', { title: 'Nodos BBIP', nodes: nodes });
         } catch {
             (error => console.log(error))
@@ -14,7 +14,7 @@ module.exports = {
     },
     services: async(req, res) => {
         try {
-            const nodes = await db.Devices.findAll({
+            const nodes = await db.devices.findAll({
                 attributes: ['name']
             })
             var options = {
