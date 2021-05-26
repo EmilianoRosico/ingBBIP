@@ -198,7 +198,7 @@ module.exports = {
                 await db.ports.update({
                     project: '',
                     status: 'Libre',
-                    license: 'No',
+                    license: 0,
                     espejado: '',
                     clientSide: '',
                     editedByUser: "Emi Edit",
