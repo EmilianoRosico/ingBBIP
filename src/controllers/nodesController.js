@@ -14,7 +14,7 @@ module.exports = {
     },
     nodeDetail: async(req, res) => {
         try {
-            const devices = await db.devices.findAll({ where: { nodesId: req.params.id }, include: [{ association: "nodes" }, { association: "deviceModels" }] })
+            const devices = await db.devices.findAll({ where: { nodesId: req.params.id }, include: [{ association: "nodes" }, { association: "devicemodels" }] })
             res.render('../views/devices', { title: 'Equipamiento BBIP', devices: devices });
         } catch (error) {
             console.log(error)

@@ -1,5 +1,5 @@
 module.exports = (sequelize, dataTypes) => {
-    const DeviceRole = sequelize.define('deviceRoles', {
+    const DeviceRole = sequelize.define('deviceroles', {
         id: {
             autoIncrement: true,
             primaryKey: true,

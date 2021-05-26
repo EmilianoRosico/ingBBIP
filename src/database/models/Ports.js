@@ -59,7 +59,7 @@ module.exports = (sequelize, dataTypes) => {
     })
     Ports.associate = function(models) {
         Ports.belongsTo(models.devices, {
-            as: "devicePorts",
+            as: "deviceports",
             foreignKey: "deviceId"
         })
     }
