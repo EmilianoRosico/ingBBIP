@@ -74,12 +74,12 @@ module.exports = (sequelize, dataTypes) => {
         paranoid: true,
     })
     Device.associate = function(models) {
-        Device.belongsTo(models.deviceModels, {
-                as: "deviceModels",
+        Device.belongsTo(models.devicemodels, {
+                as: "devicemodels",
                 foreignKey: "modelsId"
             }),
-            Device.belongsTo(models.deviceRoles, {
-                as: "deviceRoles",
+            Device.belongsTo(models.deviceroles, {
+                as: "deviceroles",
                 foreignKey: "roleId"
             }),
             Device.belongsTo(models.nodes, {

@@ -7,7 +7,7 @@ module.exports = {
         let page = req.params.pag == undefined ? 1 : req.params.pag
         let offset = req.params.offset == undefined ? 10 : req.params.offset
         try {
-            const devices = await db.devices.findAll({ limit: 10, offset: (offset * (page - 1)), include: [{ association: "nodes" }, { association: "deviceModels" }] })
+            const devices = await db.devices.findAll({ limit: 10, offset: (offset * (page - 1)), include: [{ association: "nodes" }, { association: "devicemodels" }] })
             res.render('../views/devices', { title: 'Equipamiento BBIP', devices: devices });
         } catch {
             (error => console.log(error))
@@ -19,8 +19,8 @@ module.exports = {
         try {
             const nodes = await db.nodes.findAll();
             const version = await db.versions.findAll();
-            const model = await db.deviceModels.findAll();
-            const role = await db.deviceRoles.findAll();
+            const model = await db.devicemodels.findAll();
+            const role = await db.deviceroles.findAll();
             res.render('../views/addDevice', { title: 'Agregar Equipamiento', nodes: nodes, version: version, model: model, role: role });
         } catch {
             (error => console.log(error))
@@ -66,8 +66,8 @@ module.exports = {
             if (device != null) {
                 const nodes = await db.nodes.findAll();
                 const version = await db.versions.findAll();
-                const model = await db.deviceModels.findAll();
-                const role = await db.deviceRoles.findAll();
+                const model = await db.devicemodels.findAll();
+                const role = await db.deviceroles.findAll();
                 res.render('../views/editDevice', { title: 'Editar ' + device.name, device: device, nodes: nodes, version: version, model: model, role: role });
             } else {
                 console.log('***************************************');
@@ -135,7 +135,7 @@ module.exports = {
     //Genera consultas a la DB para mostrar la información de un DEVICE. Slots filtra los slots existentes en el DEVICE.
     detail: async(req, res) => {
         try {
-            const device = await db.devices.findOne({ where: { id: req.params.id }, include: [{ association: "nodes" }, { association: "deviceModels" }] })
+            const device = await db.devices.findOne({ where: { id: req.params.id }, include: [{ association: "nodes" }, { association: "devicemodels" }] })
             const slots = await db.ports.findAll({ where: { deviceId: req.params.id }, attributes: ['slot'], group: 'slot' })
             const ports = await db.ports.findAll({
                 where: { deviceId: req.params.id },
