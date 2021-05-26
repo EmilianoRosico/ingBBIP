@@ -1,0 +1,86 @@
+<%- include('./partials/head') %>
+
+    <body>
+        <%- include('./partials/header') %>
+            <div class="d-flex justify-content-between">
+                <h1>
+                    <%= title %>
+                </h1>
+                <div class="d-flex align-items-center">
+                    <a href="/devices/add"><span class="btn btn-primary ">Agregar equipo</span></a>
+                </div>
+            </div>
+
+            <div class="container ">
+                <div class="row border">
+                    <div class="col-sm border">
+                        Name
+                    </div>
+                    <div class="col-sm border">
+                        IPMgmt
+                    </div>
+                    <div class="col-sm border">
+                        Node
+                    </div>
+                    <div class="col-sm border">
+                        Vendor
+                    </div>
+                    <div class="col-sm border">
+                        Model
+                    </div>
+                    <div class="col-sm border">
+                        Status
+                    </div>
+                    <div class="col-sm border">
+                        Actions
+                    </div>
+                </div>
+                <% devices.forEach(element=> { %>
+                    <div class="row border">
+                        <div class="col-sm border">
+                            <a href="/devices/detail/<%= element.id %>">
+                                <%= element.name %>
+                            </a>
+                        </div>
+                        <div class="col-sm border">
+                            <%= element.ipMgmt %>
+                        </div>
+                        <div class="col-sm border">
+                            <a href="/nodes/<%=element.Nodes.id%>">
+                                <%= element.Nodes.name %>
+                            </a>
+                        </div>
+                        <div class="col-sm border">
+                            <%= element.DeviceModels.vendor %>
+                        </div>
+                        <div class="col-sm border">
+                            <%= element.DeviceModels.model %>
+                        </div>
+                        <div class="col-sm border">
+                            <%= element.status %>
+                        </div>
+                        <div class=" d-flex justify-content-around col-sm border">
+                            <button><a href="/devices/edit/<%= element.id %>"><i class="fas fa-edit btn btn-primary"></i></a></button>
+                            <form class="deleteForm" action="/devices/disable" method="POST">
+                                <input type="text" hidden value="<%=element.id %>" name="id">
+                                <button type="submit" class=""><i class="fas fa-trash-alt btn btn-danger"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <%});%>
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+            <script src="/javascripts/swalDevices.js"></script>
+            <%- include('./partials/footer') %>

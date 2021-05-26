@@ -1,0 +1,35 @@
+<script>const clickHandler = (id) => {
+  console.log(id, "clicked!");
+}
+</script>
+
+       <div class="d-flex flex-column">
+          <img src="/images/NE40e-X16a/top.png" alt="">
+          <div class="d-flex">
+            <img src="/images/NE40e-X16a/1-1.png" alt="" >
+            <img src="/images/NE40e-X16a/1-2.png" alt="" id="slot1" onclick="clickHandler(this.id)">
+            <img src="/images/NE40e-X16a/1-2.png" alt="" id="slot2" onclick="clickHandler(this.id)">
+            <img src="/images/NE40e-X16a/1-3.png" alt="" id="slot3" onclick="clickHandler(this.id)">
+            <img src="/images/NE40e-X16a/1-4.png" alt="">
+            <img src="/images/NE40e-X16a/1-3.png" alt="" id="slot4" onclick="clickHandler(this.id)">
+            <img src="/images/NE40e-X16a/1-3.png" alt="" id="slot5" onclick="clickHandler(this.id)">
+            <img src="/images/NE40e-X16a/1-3.png" alt="" id="slot6" onclick="clickHandler(this.id)">
+            <img src="/images/NE40e-X16a/1-3.png" alt="" id="slot7" onclick="clickHandler(this.id)">
+            <img src="/images/NE40e-X16a/1-5.png" alt="">
+          </div>
+          <img src="/images/NE40e-X16a/middle.png" alt="">
+          <div class="d-flex">
+            <img src="/images/NE40e-X16a/2-1.png" alt="">
+            <img src="/images/NE40e-X16a/2-2.png" alt="" id="slot8" onclick="clickHandler(this.id)">
+            <img src="/images/NE40e-X16a/2-3.png" alt="" id="slot9" onclick="clickHandler(this.id)">
+            <img src="/images/NE40e-X16a/2-3.png" alt="" id="slot10" onclick="clickHandler(this.id)">
+            <img src="/images/NE40e-X16a/2-3.png" alt="" id="slot11" onclick="clickHandler(this.id)">
+            <img src="/images/NE40e-X16a/2-3b.png" alt="" id="slot12" onclick="clickHandler(this.id)">
+            <img src="/images/NE40e-X16a/2-3b.png" alt="" id="slot13" onclick="clickHandler(this.id)">
+            <img src="/images/NE40e-X16a/2-3b.png" alt="" id="slot14" onclick="clickHandler(this.id)">
+            <img src="/images/NE40e-X16a/2-3b.png" alt="" id="slot15" onclick="clickHandler(this.id)">
+            <img src="/images/NE40e-X16a/2-3b.png" alt="" id="slot16" onclick="clickHandler(this.id)">
+            <img src="/images/NE40e-X16a/2-4.png" alt="">
+          </div>
+          <img src="/images/NE40e-X16a/bottom.png" alt="">
+        </div>

@@ -1,0 +1,188 @@
+<%- include('./partials/head') %>
+
+    <body>
+        <%- include('./partials/header') %>
+            <div class="d-flex justify-content-between">
+                <h3>
+                    <%= device.name %>
+                </h3>
+                <div class="d-flex align-items-center">
+                    <a href="/devices/add"><span class="btn btn-primary ">Agregar equipo</span></a>
+                </div>
+            </div>
+            <div class="d-flex border">
+                <div class="col-md-3">
+                    <div class="col-sm">
+                        <strong>Lo25:</strong>
+                        <%= device.ipMgmt %>
+                    </div>
+                    <div class="col-sm">
+                        <strong>Nodo:</strong>
+                        <a href="/nodes/<%=device.Nodes.id%>">
+                            <%= device.Nodes.name %>
+                        </a>
+                    </div>
+                    <div class="col-sm">
+                        <strong>País:</strong>
+                        <%= device.Nodes.country %>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="col-sm">
+                        <strong>Vendor:</strong>
+                        <%= device.DeviceModels.vendor %>
+                    </div>
+                    <div class="col-sm">
+                        <strong>Modelo:</strong>
+                        <a href="/images/<%=device.DeviceModels.model%>.jpg" onclick="MM_openBrWindow('/images/<%=device.DeviceModels.model%>.jpg','DeviceImg','scrollbars=yes,width=650,height=500'); return false;">
+                            <%= device.DeviceModels.model %>
+                        </a>
+                    </div>
+                    <div class="col-sm">
+                        <strong>Estado:</strong>
+                        <%= device.status %>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="col-sm">
+                        <strong>Nave:</strong>
+                        <%= device.room %>
+                    </div>
+                    <div class="col-sm">
+                        <strong>Fila:</strong>
+                        <%= device.row %>
+                    </div>
+                    <div class="col-sm">
+                        <strong>Rack:</strong>
+                        <%= device.rack %>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="col-sm">
+                        <strong>Jerarquia:</strong>
+                        <%= device.hierarchy %>
+                    </div>
+                    <div class="col-sm">
+                        <strong>Virtual:</strong>
+                        <%= device.virtual===0?"NO":"SI" %>
+                    </div>
+                    <div class="col-sm">
+                        <strong>Lic NSO:</strong>
+                        <%= device.nsoLicense===0?"NO":"SI" %>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion accordion-flush" id="deviceSlots">
+                <% slots.forEach(element => { %>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-heading<%=element.slot%>">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%=element.slot%>" aria-expanded="false" aria-controls="flush-collapse<%=element.slot%>">
+                        Slot #<%=element.slot%>
+                      </button>
+                        </h2>
+                        <div id="flush-collapse<%=element.slot%>" class="accordion-collapse collapse" aria-labelledby="flush-heading<%=element.slot%>" data-bs-parent="#deviceSlots">
+                            <div class="accordion-body">
+                                <div class="container-fluid ">
+                                    <div class="row border font-small fw-bold">
+                                        <div class="col-1 border">
+                                            Fecha
+                                        </div>
+                                        <div class="col-1 border">
+                                            Usuario
+                                        </div>
+                                        <div class="col-1 border">
+                                            Proyecto/SOL
+                                        </div>
+                                        <div class="col-1 border">
+                                            Placa/Modulo
+                                        </div>
+                                        <div class="col-1 border">
+                                            Licencia
+                                        </div>
+                                        <div class="col-1 border">
+                                            Slot
+                                        </div>
+                                        <div class="col-1 border">
+                                            SubSlot
+                                        </div>
+                                        <div class="col-1 border">
+                                            Puerto
+                                        </div>
+                                        <div class="col-1 border">
+                                            Estado
+                                        </div>
+                                        <div class="col-1 border">
+                                            Espejado
+                                        </div>
+                                        <div class="col-1 border">
+                                            ExtremoCliente
+                                        </div>
+                                        <div class="col-1 border">
+                                            Acciones
+                                        </div>
+                                    </div>
+                                    <% ports.forEach(ele => { %>
+                                        <% if (ele.slot ==element.slot) { %>
+                                            <div class="row border font-small">
+                                                <div class="col-1 border">
+                                                    <%= ele.updatedAt %>
+                                                </div>
+                                                <div class="col-1 border">
+                                                    <%= ele.editedByUser %>
+                                                </div>
+                                                <div class="col-1 border">
+                                                    <%= ele.project %>
+                                                </div>
+                                                <div class="col-1 border">
+                                                    <%= ele.boardModule %>
+                                                </div>
+                                                <div class="col-1 border">
+                                                    <%= ele.license == 1 ? 'SI':'NO' %>
+                                                </div>
+                                                <div class="col-1 border">
+                                                    <%= ele.slot %>
+                                                </div>
+                                                <div class="col-1 border">
+                                                    <%= ele.subSlot %>
+                                                </div>
+                                                <div class="col-1 border">
+                                                    <%= ele.port %>
+                                                </div>
+                                                <div class="col-1 border">
+                                                    <%= ele.status %>
+                                                </div>
+                                                <div class="col-1 border">
+                                                    <%= ele.espejado %>
+                                                </div>
+                                                <div class="col-1 border">
+                                                    <%= ele.clientSide %>
+                                                </div>
+                                                <div class="d-flex justify-content-around col-1 border">
+                                                    <form class="deleteForm" action="/devices/edit/port/releasePort" method="POST">
+                                                        <button>
+                                                        <a href="/devices/edit/port/<%= ele.id %>" onclick="MM_openBrWindow('/devices/edit/port/<%= ele.id %>','Editar Puerto','scrollbars=yes,width=650,height=500'); return false;">
+                                                        <i class="fas fa-edit btn btn-primary"></i>
+                                                        </a>
+                                                        </button>
+                                                        <input type="text" hidden value="<%=ele.id %>" name="id">
+                                                        <button type="submit" class=""><i class="fas fa-trash-alt btn btn-danger"></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <% } %>
+                                                <% }) %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+
+            <script type="text/javascript">
+                function MM_openBrWindow(theURL, winName, features) { //v2.0
+                    window.open(theURL, winName, features);
+                }
+            </script>
+            <script src="/javascripts/swalDevicesPort.js"></script>
+            <%- include('./partials/footer') %>

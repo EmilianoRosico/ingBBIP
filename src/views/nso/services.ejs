@@ -1,0 +1,59 @@
+<%- include('./../partials/head') %>
+
+    <body>
+        <%- include('./../partials/header') %>
+            <div class="d-flex justify-content-between">
+                <h1>
+                    <%= title %>
+                </h1>
+                <div>
+                    <a href="/devices/add"><span class="add-buttom">Agregar Nodo</span></a>
+                </div>
+            </div>
+
+            <div class="container ">
+                <div class="row border">
+                    <div class="col-sm border">
+                        Devices
+                    </div>
+                    <div class="col-sm border">
+                        Mgmt-Access
+                    </div>
+                    <div class="col-sm border">
+                        Netflow
+                    </div>
+                    <!--<div class="col-sm border">
+                        Country
+                    </div>
+                    <div class="col-sm border">
+                        Rooms
+                    </div>-->
+                </div>
+                <% nodes.forEach(element=> { %>
+                    <div class="row border">
+                        <div class="col-sm border">
+                            <%= element.name %>
+                        </div>
+                        <div class="col-sm border">
+                            <%= element.status %>
+                        </div>
+                        <div class="col-sm border">
+                            <%= element.province %>
+                        </div>
+                    </div>
+                    <%});%>
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+            <%- include('./../partials/footer') %>
