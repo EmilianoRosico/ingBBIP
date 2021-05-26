@@ -1,0 +1,101 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'PT Sans Narrow', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+main {
+    background-color: lightgray;
+}
+
+button {
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+
+/* Barra de navegación */
+
+.navbar {
+    display: flex;
+    background-color: gray;
+    align-items: center;
+}
+
+.navbar_logo {
+    width: 54px;
+}
+
+.navbar_logo img {
+    width: 100%;
+}
+
+.navbar_search {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border-radius: 9px;
+    border: black solid 1px;
+    align-self: center;
+    margin: 10px;
+}
+
+.navbar_search form {
+    width: 90%;
+}
+
+.navbar_search input {
+    width: 98%;
+    border-radius: 9px;
+    border: none;
+    height: 40px;
+}
+
+.navbar_buttons {
+    text-align: right;
+    width: 40%;
+}
+
+.flex {
+    display: flex;
+}
+
+
+/*Devices  */
+
+.add-buttom {
+    border: solid 1px black;
+    border-radius: 9px;
+    font-size: 1.2em;
+    padding: 6px;
+    background-color: green;
+}
+
+.grid-title {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+
+.border-grid {
+    width: 100px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.border-grid a {
+    color: blue;
+}
+
+.font-small {
+    font-size: 0.8rem;
+}

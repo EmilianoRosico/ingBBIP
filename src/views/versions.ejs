@@ -1,0 +1,63 @@
+<%- include('./partials/head') %>
+
+    <body>
+        <%- include('./partials/header') %>
+            <div class="d-flex justify-content-between">
+                <h1>
+                    <%= title %>
+                </h1>
+                <div>
+                    <a href="/devices/add"><span class="add-buttom">Agregar Nodo</span></a>
+                </div>
+            </div>
+
+            <div class="container ">
+                <div class="row border">
+                    <div class="col-sm border">
+                        Name
+                    </div>
+                    <div class="col-sm border">
+                        ServicePack
+                    </div>
+                    <div class="col-sm border">
+                        Smu/Patch
+                    </div>
+                    <div class="col-sm border">
+                        Link PSRR
+                    </div>
+                </div>
+                <% versions.forEach(element=> { %>
+                    <div class="row border">
+                        <div class="col-sm border">
+                            <a href="/versions/<%= element.id%>">
+                                <%= element.name %>
+                            </a>
+                        </div>
+                        <div class="col-sm border">
+                            <%= element.servicePack %>
+                        </div>
+                        <div class="col-sm border">
+                            <%= element.smuPatch %>
+                        </div>
+                        <div class="col-sm border">
+                            <a href="<%= element.psrrLink %>" target="_blank">
+                                <%= element.psrrLink %>
+                            </a>
+                        </div>
+                    </div>
+                    <%});%>
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+            <%- include('./partials/footer') %>

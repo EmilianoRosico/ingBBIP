@@ -1,0 +1,62 @@
+<%- include('./partials/head') %>
+
+    <body>
+        <div class="container-fluid">
+            <form class="row g-3 needs-validation" action="/devices/edit/port/<%= port.id %>" method="POST" novalidate>
+                <div class="col-md-4">
+                    <label for="project" class="form-label">Proyecto/SOL</label>
+                    <input type="text" class="form-control" id="project" name="project" value="<%=port.project%>" required>
+                    <div class="invalid-feedback">
+                        Por favor ingresa el proyecto.
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <label for="boardModule" class="form-label">Puerto</label>
+                    <select class="form-select" id="boardModule" name="boardModule" required>
+                        <option selected disabled value="<%=port.boardModule%>"><%=port.boardModule%></option>
+                        <option value="SFP-1G">SFP-1G</option>
+                        <option value="SFP-10G">SFP-10G</option>
+                        <option value="SFP-100G">SFP-100G</option>
+                        </select>
+                    <div class="invalid-feedback">
+                        Por favor seleccione un tipo de IF.
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <label for="status" class="form-label">Estado</label>
+                    <select class="form-select" id="status" name="status" required>
+                        <option selected disabled value="<%=port.status%>"><%=port.status%></option>
+                        <option value="Asignado">Asignado</option>
+                        <option value="Libre">Libre</option>
+                        </select>
+                    <div class="invalid-feedback">
+                        Por favor seleccione un estado.
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="espejado" class="form-label">Espejado</label>
+                    <input type="text" class="form-control" id="espejado" name="espejado" value="<%=port.espejado %>" required>
+                    <div class=" invalid-feedback ">
+                        Por favor ingrese los datos de espejado.
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="clientSide" class="form-label">ExtremoCliente</label>
+                    <input type="text" class="form-control" id="clientSide" name="clientSide" value="<%=port.clientSide %>" required>
+                    <div class=" invalid-feedback ">
+                        Por favor ingrese el destino de la conexión.
+                    </div>
+                </div>
+                <div class=" col-2 form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="license" name="license" <% if (port.license==1) { %> checked
+                    <%}%>>
+                        <label class="form-check-label" for="license">¿Licencia?</label>
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-primary" type="submit">Guardar</button>
+                </div>
+            </form>
+        </div>
+        <script async src="/javascripts/validationForm.js"></script>
+    </body>

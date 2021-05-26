@@ -1,0 +1,149 @@
+<%- include('./partials/head') %>
+
+    <body>
+        <%- include('./partials/header') %>
+            <div class="d-flex justify-content-between">
+                <h2>
+                    <%= title %>
+                </h2>
+            </div>
+
+            <div class="container-fluid">
+                <form class="row g-3 needs-validation" action="/devices/edit/<%=device.id%>" method="POST" novalidate>
+                    <div class="col-md-2">
+                        <label for="name" class="form-label">Acrónimo</label>
+                        <input type="text" class="form-control" id="name" name="name" value="<%=device.name%>" required>
+                        <div class="invalid-feedback">
+                            Por favor ingresa el acrónimo del equipo.
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="ipMgmt" class="form-label">IP Mgmt (Lo25)</label>
+                        <input type="text" class="form-control" id="ipMgmt" name="ipMgmt" value="<%=device.ipMgmt%>" required>
+                        <div class="invalid-feedback">
+                            Por favor ingresa el IP de Management del equipo.
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="ipIGP" class="form-label">IP IGP (Lo10)</label>
+                        <input type="text" class="form-control" id="ipIGP" name="ipIGP" value="<%=device.ipIgp%>" required>
+                        <div class="invalid-feedback">
+                            Por favor ingresa el IP de Management del equipo.
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="node" class="form-label">Nodo</label>
+                        <select class="form-select" id="node" name="node" required>
+                        <option selected disabled value="<%=device.nodesId%>"><%=nodes[device.nodesId-1].name%></option>
+                        <% nodes.forEach(element => { %>
+                          <option value="<%= element.id%>"><%= element.name%></option>
+                        <% }) %>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor seleccione el NODO donde esta instalado.
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <label for="room" class="form-label">Nave</label>
+                        <input type="text" class="form-control" id="room" name="room" value="<%=device.room%>" required>
+                        <div class=" invalid-feedback ">
+                            Por favor ingresa la nave donde esta instalado.
+                        </div>
+                    </div>
+                    <div class="col-md-1 ">
+                        <label for="row " class="form-label ">Fila</label>
+                        <input type="text " class="form-control " id="row " name="row " value="<%=device.row%>" required>
+                        <div class="invalid-feedback">
+                            Por favor ingresa la fila donde esta instalado.
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <label for="rack" class="form-label">Rack</label>
+                        <input type="text" class="form-control" id="rack" name="rack" value="<%=device.rack%>" required>
+                        <div class=" invalid-feedback ">
+                            Por favor ingresa el rack donde esta instalado.
+                        </div>
+                    </div>
+                    <div class="col-md-1 ">
+                        <label for="rackUnit " class="form-label ">Rack Unit</label>
+                        <input type="text " class="form-control " id="rackUnit " name="rackUnit " value="<%=device.rackUnit%>" required>
+                        <div class="invalid-feedback">
+                            Por favor ingresa el rack unit donde esta instalado.
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="model" class="form-label">Modelo</label>
+                        <select class="form-select" id="model" name="model" required>
+                        <option selected disabled value="<%=device.modelsId%>"><%=model[device.modelsId-1].model%></option>
+                        <% model.forEach(element => { %>
+                            <option value="<%= element.id%>"><%= element.model%></option>
+                          <% }) %>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor seleccione un Modelo.
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="version" class="form-label">Versión</label>
+                        <select class="form-select" id="version" name="version" required>
+                        <option selected disabled value="<%=device.VersionId%>"><%=version[device.modelsId-1].name%>  -  <%=version[device.modelsId-1].servicePack%> - <%= version[device.modelsId-1].smuPatch%></option>
+                        <% version.forEach(element => { %>
+                            <option value="<%= element.id%>"><%= element.name%> -  <%=element.servicePack%> - <%= element.smuPatch%></option>
+                          <% }) %>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor seleccione una versión.
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="status" class="form-label">Estatus</label>
+                        <select class="form-select" id="status" name="status" required>
+                        <option selected disabled value="<%=device.status%>"><%=device.status%></option>
+                        <option value="En Servicio">En Servicio</option>
+                        <option value="Desinstalado">Desinstalado</option>
+                        <option value="Proyectado Instalar">Proyectado Instalar</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor seleccione un estado.
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="hierarchy" class="form-label">Jearquía</label>
+                        <select class="form-select" id="hierarchy" name="hierarchy" required>
+                      <option selected disabled value="<%=device.hierarchy%>"><%=device.hierarchy%></option>
+                      <option value="Acceso">Acceso</option>
+                      <option value="Core">Core</option>
+                      </select>
+                        <div class="invalid-feedback">
+                            Por favor seleccione la jerarquía.
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="role" class="form-label">Rol</label>
+                        <select class="form-select" id="role" name="role" required>
+                        <option selected disabled value="<%=device.roleId%>"><%=role[device.modelsId-1].name%></option>
+                        <% role.forEach(element => { %>
+                            <option value="<%= element.id%>"><%= element.name%></option>
+                          <% }) %>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor seleccione un Rol.
+                        </div>
+                    </div>
+                    <div class=" col-2 form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="virtual" name="virtual" <% if (device.virtual==1) { %> checked
+                        <%}%>>
+                            <label class="form-check-label" for="virtual">¿Virtual?</label>
+                    </div>
+                    <div class=" col-2 form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="licenseNSO" name="licenseNSO" <% if (device.nsoLicense==1) { %> checked
+                        <%}%>>
+                            <label class="form-check-label" for="licenseNSO">¿Licencia NSO?</label>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-primary" type="submit">Editar Equipo</button>
+                    </div>
+                </form>
+            </div>
+            <script async src="/javascripts/validationForm.js"></script>
+            <%- include('./partials/footer') %>
