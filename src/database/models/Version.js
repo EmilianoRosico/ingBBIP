@@ -1,5 +1,5 @@
 module.exports = (sequelize, dataTypes) => {
-    const Version = sequelize.define('Versions', {
+    const Version = sequelize.define('versions', {
         id: {
             autoIncrement: true,
             primaryKey: true,
@@ -36,13 +36,13 @@ module.exports = (sequelize, dataTypes) => {
     }, {
         paranoid: true,
     })
-    Version.associate = function (models) {
-        Version.belongsTo(models.DeviceRoles, {
-            as: "Versions",
-            foreignKey: "forRoleId"
-        }),
-            Version.belongsTo(models.DeviceModels, {
-                as: "VersionDeviceModels",
+    Version.associate = function(models) {
+        Version.belongsTo(models.deviceRoles, {
+                as: "versions",
+                foreignKey: "forRoleId"
+            }),
+            Version.belongsTo(models.deviceModels, {
+                as: "versionDeviceModels",
                 foreignKey: "forModelId"
             })
     }

@@ -1,5 +1,5 @@
 module.exports = (sequelize, dataTypes) => {
-    const Device = sequelize.define('Devices', {
+    const Device = sequelize.define('devices', {
         id: {
             autoIncrement: true,
             primaryKey: true,
@@ -74,16 +74,16 @@ module.exports = (sequelize, dataTypes) => {
         paranoid: true,
     })
     Device.associate = function(models) {
-        Device.belongsTo(models.DeviceModels, {
-                as: "DeviceModels",
+        Device.belongsTo(models.deviceModels, {
+                as: "deviceModels",
                 foreignKey: "modelsId"
             }),
-            Device.belongsTo(models.DeviceRoles, {
-                as: "DeviceRoles",
+            Device.belongsTo(models.deviceRoles, {
+                as: "deviceRoles",
                 foreignKey: "roleId"
             }),
-            Device.belongsTo(models.Nodes, {
-                as: "Nodes",
+            Device.belongsTo(models.nodes, {
+                as: "nodes",
                 foreignKey: "nodesId"
             })
     }

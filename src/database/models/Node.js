@@ -1,5 +1,5 @@
 module.exports = (sequelize, dataTypes) => {
-    const Node = sequelize.define('Nodes', {
+    const Node = sequelize.define('nodes', {
         id: {
             autoIncrement: true,
             primaryKey: true,
@@ -32,9 +32,9 @@ module.exports = (sequelize, dataTypes) => {
     }, {
         paranoid: true,
     })
-    Node.associate = function (models) {
-        Node.hasMany(models.Devices, {
-            as: "Nodes",
+    Node.associate = function(models) {
+        Node.hasMany(models.devices, {
+            as: "nodes",
             foreignKey: "nodesId"
         })
     }

@@ -18,24 +18,24 @@
                     </div>
                     <div class="col-sm">
                         <strong>Nodo:</strong>
-                        <a href="/nodes/<%=device.Nodes.id%>">
-                            <%= device.Nodes.name %>
+                        <a href="/nodes/<%=device.nodes.id%>">
+                            <%= device.nodes.name %>
                         </a>
                     </div>
                     <div class="col-sm">
                         <strong>País:</strong>
-                        <%= device.Nodes.country %>
+                        <%= device.nodes.country %>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="col-sm">
                         <strong>Vendor:</strong>
-                        <%= device.DeviceModels.vendor %>
+                        <%= device.deviceModels.vendor %>
                     </div>
                     <div class="col-sm">
                         <strong>Modelo:</strong>
-                        <a href="/images/<%=device.DeviceModels.model%>.jpg" onclick="MM_openBrWindow('/images/<%=device.DeviceModels.model%>.jpg','DeviceImg','scrollbars=yes,width=650,height=500'); return false;">
-                            <%= device.DeviceModels.model %>
+                        <a href="/images/<%=device.deviceModels.model%>.jpg" onclick="MM_openBrWindow('/images/<%=device.deviceModels.model%>.jpg','DeviceImg','scrollbars=yes,width=650,height=500'); return false;">
+                            <%= device.deviceModels.model %>
                         </a>
                     </div>
                     <div class="col-sm">

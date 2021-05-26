@@ -1,5 +1,5 @@
 module.exports = (sequelize, dataTypes) => {
-    const DeviceRole = sequelize.define('DeviceRoles', {
+    const DeviceRole = sequelize.define('deviceRoles', {
         id: {
             autoIncrement: true,
             primaryKey: true,
@@ -16,15 +16,15 @@ module.exports = (sequelize, dataTypes) => {
     }, {
         paranoid: true,
     })
-    DeviceRole.associate = function (models) {
-        DeviceRole.hasMany(models.Devices, {
-            as: "Devices",
-            foreignKey: "roleId"
-        }),
-        DeviceRole.hasMany(models.Versions, {
-            as: "Versions",
-            foreignKey: "forRoleId"
-        })
+    DeviceRole.associate = function(models) {
+        DeviceRole.hasMany(models.devices, {
+                as: "devices",
+                foreignKey: "roleId"
+            }),
+            DeviceRole.hasMany(models.versions, {
+                as: "versions",
+                foreignKey: "forRoleId"
+            })
     }
     return DeviceRole;
 }
