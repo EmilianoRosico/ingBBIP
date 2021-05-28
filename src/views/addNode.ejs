@@ -8,59 +8,47 @@
                 </h1>
             </div>
 
-            <form class="row g-3 needs-validation" novalidate>
-                <div class="col-md-4">
-                    <label for="validationCustom01" class="form-label">First name</label>
-                    <input type="text" class="form-control" id="validationCustom01" value="Mark" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <label for="validationCustom02" class="form-label">Last name</label>
-                    <input type="text" class="form-control" id="validationCustom02" value="Otto" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <label for="validationCustomUsername" class="form-label">Username</label>
-                    <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+            <div class="container-fluid">
+                <form class="row g-3 needs-validation" action="/nodes/add" method="POST" novalidate>
+                    <div class="col-md-2">
+                        <label for="name" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Córdoba ECP" required>
                         <div class="invalid-feedback">
-                            Please choose a username.
+                            Por favor ingresa el nombre del Nodo.
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <label for="validationCustom03" class="form-label">City</label>
-                    <input type="text" class="form-control" id="validationCustom03" required>
-                    <div class="invalid-feedback">
-                        Please provide a valid city.
+                    <div class="col-md-2">
+                        <label for="cellId" class="form-label">Cell ID</label>
+                        <input type="text" class="form-control" id="cellId" name="cellId" placeholder="CO008" required>
+                        <div class="invalid-feedback">
+                            Por favor ingresa el cell id del nodo.
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <label for="validationCustom04" class="form-label">State</label>
-                    <select class="form-select" id="validationCustom04" required>
-                  <option selected disabled value="">Choose...</option>
-                  <option>...</option>
-                </select>
-                    <div class="invalid-feedback">
-                        Please select a valid state.
+                    <div class="col-md-2">
+                        <label for="province" class="form-label">Provincia</label>
+                        <input type="text" class="form-control" id="province" name="province" placeholder="Córdoba" required>
+                        <div class="invalid-feedback">
+                            Por favor ingresa la provincia.
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <label for="validationCustom05" class="form-label">Zip</label>
-                    <input type="text" class="form-control" id="validationCustom05" required>
-                    <div class="invalid-feedback">
-                        Please provide a valid zip.
+                    <div class="col-md-2">
+                        <label for="country" class="form-label">País</label>
+                        <input type="text" class="form-control" id="country" name="country" placeholder="Argentina" required>
+                        <div class="invalid-feedback">
+                            Por favor ingresa el país.
+                        </div>
                     </div>
-                </div>
-                <div class="col-12">
-                    <button class="btn btn-primary" type="submit">Submit form</button>
-                </div>
-            </form>
+                    <div class="col-md-1">
+                        <label for="totalRooms" class="form-label">Naves</label>
+                        <input type="text" class="form-control" id="totalRooms" name="totalRooms" required>
+                        <div class="invalid-feedback">
+                            Por favor ingresa el total de naves.
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-primary" type="submit">Crear Equipo</button>
+                    </div>
+                </form>
             </div>
-
+            <script async src="/javascripts/validationForm.js"></script>
             <%- include('./partials/footer') %>
