@@ -15,7 +15,6 @@ module.exports = {
 
     },
     add: async(req, res) => {
-
         try {
             const nodes = await db.nodes.findAll();
             const version = await db.versions.findAll();
@@ -27,12 +26,11 @@ module.exports = {
         }
     },
     addPost: async(req, res) => {
-
         try {
             const nodeExist = await db.devices.findAll({ where: { name: req.body.name } })
-            if (nodeExist.length == 0) {
+            if (nodeExist.length == 0 || req.body.name == '') {
                 const node = await db.devices.create({
-                    name: req.body.name,
+                    name: req.body.name.toUpperCase(),
                     status: req.body.status,
                     roleId: req.body.role,
                     modelsId: req.body.model,
@@ -50,7 +48,7 @@ module.exports = {
                 })
                 res.redirect('/devices/detail/' + node.id)
             } else {
-                res.redirect('/devices')
+                res.render('somethingWrong', { title: 'SomethingWrong', error: 'El equipo que desea agregar ya existe!' })
                 console.log("************************************************")
                 console.log("El dispositivo " + req.body.name + " ya existe!")
                 console.log("************************************************")
@@ -80,12 +78,11 @@ module.exports = {
         }
     },
     editPost: async(req, res) => {
-
         try {
             const nodeExist = await db.devices.findByPk(req.params.id)
             if (nodeExist != null) {
                 await db.devices.update({
-                    name: req.body.name,
+                    name: req.body.name.toUpperCase(),
                     status: req.body.status,
                     roleId: req.body.role,
                     modelsId: req.body.model,
@@ -105,7 +102,7 @@ module.exports = {
                 })
                 res.redirect('/devices')
             } else {
-                res.redirect('/devices')
+                res.render('somethingWrong', { title: 'SomethingWrong', error: 'El equipo que desea agregar NO existe!' })
                 console.log("************************************************")
                 console.log("El dispositivo " + req.body.name + " NO existe!")
                 console.log("************************************************")
@@ -217,5 +214,12 @@ module.exports = {
             console.log(error)
         }
     },
-
+    devicesFetch: async(req, res) => {
+        try {
+            const nodes = await db.devices.findAll()
+            res.send(nodes);
+        } catch (error) {
+            console.log(error)
+        }
+    },
 }

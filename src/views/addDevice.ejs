@@ -9,7 +9,7 @@
             </div>
 
             <div class="container-fluid">
-                <form class="row g-3 needs-validation" action="/devices/add" method="POST" novalidate>
+                <form class="row g-3 needs-validation devices" action="/devices/add" method="POST" novalidate>
                     <div class="col-md-2">
                         <label for="name" class="form-label">Acrónimo</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="CO008-PE-07" required>
@@ -144,4 +144,5 @@
                 </form>
             </div>
             <script async src="/javascripts/validationForm.js"></script>
+            <script async src="/javascripts/swalDevicesAdd.js"></script>
             <%- include('./partials/footer') %>

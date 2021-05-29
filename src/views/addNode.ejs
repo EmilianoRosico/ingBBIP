@@ -9,7 +9,7 @@
             </div>
 
             <div class="container-fluid">
-                <form class="row g-3 needs-validation" action="/nodes/add" method="POST" novalidate>
+                <form class="row g-3 needs-validation nodes" action="/nodes/add" method="POST" novalidate>
                     <div class="col-md-2">
                         <label for="name" class="form-label">Nombre</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Córdoba ECP" required>
@@ -33,9 +33,14 @@
                     </div>
                     <div class="col-md-2">
                         <label for="country" class="form-label">País</label>
-                        <input type="text" class="form-control" id="country" name="country" placeholder="Argentina" required>
+                        <select class="form-select" id="country" name="country" required>
+                            <option selected disabled value="">Elija...</option>
+                            <option value="Argentina">Argentina</option>
+                            <option value="Paraguay">Paraguay</option>
+                            <option value="Uruguay">Uruguay</option>
+                            </select>
                         <div class="invalid-feedback">
-                            Por favor ingresa el país.
+                            Por favor selecciona el país.
                         </div>
                     </div>
                     <div class="col-md-1">
@@ -51,4 +56,5 @@
                 </form>
             </div>
             <script async src="/javascripts/validationForm.js"></script>
+            <script async src="/javascripts/swalNodes.js"></script>
             <%- include('./partials/footer') %>

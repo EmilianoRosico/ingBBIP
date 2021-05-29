@@ -5,6 +5,7 @@ var router = express.Router();
 router.get('/', nodesController.nodes);
 router.get('/add', nodesController.addNode);
 router.post('/add', nodesController.addNodePost);
+router.get('/nodesFetch', nodesController.nodesFetch)
 router.get('/:id', nodesController.nodeDetail)
 
 
