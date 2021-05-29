@@ -4,6 +4,7 @@ var router = express.Router();
 
 router.get('/', devicesController.devices);
 router.get('/add', devicesController.add);
+router.get('/devicesFetch', devicesController.devicesFetch);
 router.post('/add', devicesController.addPost);
 router.get('/edit/:id', devicesController.edit);
 router.post('/edit/:id', devicesController.editPost);
