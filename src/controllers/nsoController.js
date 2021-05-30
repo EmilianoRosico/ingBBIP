@@ -23,7 +23,7 @@ module.exports = {
                 'headers': {
                     'Content-Type': 'application/yang-patch+json',
                     'Accept': 'application/yang-data+json',
-                    'Authorization': 'Basic Y3RpNzk1MjpQcjB4dzRsbA=='
+                    'Authorization': process.env.NSO_AUTH
                 }
             };
             var devices = {}
