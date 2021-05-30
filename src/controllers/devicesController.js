@@ -3,8 +3,8 @@ const db = require('../database/models');
 module.exports = {
     devices: async(req, res) => {
         //Manejo del paginado
-        let page = Number(req.params.pag == undefined || req.params.pag < 1 ? 1 : req.params.pag)
         let totalPages = Math.ceil(await db.devices.count() / 10);
+        let page = Number(req.params.pag == undefined || req.params.pag < 1 || req.params.pag > totalPages ? 1 : req.params.pag)
         try {
             const devices = await db.devices.findAll({
                 limit: 10,

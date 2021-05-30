@@ -2,8 +2,8 @@ const db = require('../database/models');
 
 module.exports = {
     nodes: async(req, res) => {
-        let page = Number(req.params.pag == undefined || req.params.pag < 1 ? 1 : req.params.pag)
         let totalPages = Math.ceil(await db.nodes.count() / 10);
+        let page = Number(req.params.pag == undefined || req.params.pag < 1 || req.params.pag > totalPages ? 1 : req.params.pag)
         try {
             const nodes = await db.nodes.findAll({
                 limit: 10,
