@@ -7,8 +7,8 @@ async function auth(username, password) {
             url: 'ldap://10.92.55.27:389',
             // tlsOptions: { rejectUnauthorized: false }
         },
-        adminDn: 'CN=ciscowaeuser,OU=Servicios,OU=Usuarios de CTI,DC=ctimovil,DC=net',
-        adminPassword: 'C1sC0Waeus3r',
+        adminDn: process.env.LDAP_USER,
+        adminPassword: process.env.LDAP_PASS,
         userPassword: password,
         userSearchBase: 'OU=Usuarios de CTI,DC=ctimovil,DC=net',
         usernameAttribute: 'cn',
@@ -36,6 +36,4 @@ async function auth(username, password) {
 
 
 }
-//, err => { console.log(err); }
-//auth('ctia7952', 'Pr0xw4ll#')
 module.exports = { auth }
