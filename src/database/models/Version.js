@@ -38,7 +38,7 @@ module.exports = (sequelize, dataTypes) => {
     })
     Version.associate = function(models) {
         Version.belongsTo(models.deviceroles, {
-                as: "versions",
+                as: "versiontorole",
                 foreignKey: "forRoleId"
             }),
             Version.belongsTo(models.devicemodels, {

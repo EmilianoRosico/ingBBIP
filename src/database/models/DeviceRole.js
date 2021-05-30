@@ -22,7 +22,7 @@ module.exports = (sequelize, dataTypes) => {
                 foreignKey: "roleId"
             }),
             DeviceRole.hasMany(models.versions, {
-                as: "versions",
+                as: "versiontorole",
                 foreignKey: "forRoleId"
             })
     }

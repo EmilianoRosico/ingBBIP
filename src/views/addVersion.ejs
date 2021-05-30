@@ -1,0 +1,72 @@
+<%- include('./partials/head') %>
+
+    <body>
+        <%- include('./partials/header') %>
+            <div class="d-flex justify-content-between">
+                <h1>
+                    <%= title %>
+                </h1>
+            </div>
+
+            <div class="container-fluid">
+                <form class="row g-3 needs-validation nodes" action="/versions/add" method="POST" novalidate>
+                    <div class="col-md-2">
+                        <label for="name" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="V800R11C10" required>
+                        <div class="invalid-feedback">
+                            Por favor ingresa el nombre de la versión.
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="servicePack" class="form-label">ServicePack</label>
+                        <input type="text" class="form-control" id="servicePack" name="servicePack" placeholder="SPC100" required>
+                        <div class="invalid-feedback">
+                            Por favor ingresa el ServicePack.
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="smuPatch" class="form-label">Smu/Patch</label>
+                        <input type="text" class="form-control" id="smuPatch" name="smuPatch" placeholder="SPH037" required>
+                        <div class="invalid-feedback">
+                            Por favor ingresa el Smu/Patch.
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="psrrLink" class="form-label">Link PSRR</label>
+                        <input type="text" class="form-control" id="psrrLink" name="psrrLink" placeholder="https://colaboracion.claro.amx" required>
+                        <div class="invalid-feedback">
+                            Por favor ingresa el de sharepoint al PSRR de la versión.
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="forRoleId" class="form-label">Roles</label>
+                        <select class="form-select" id="forRoleId" name="forRoleId" required>
+                        <option selected disabled value="">Elija...</option>
+                        <% role.forEach(element => { %>
+                          <option value="<%= element.id%>"><%= element.name%></option>
+                        <% }) %>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor seleccione el NODO donde esta instalado.
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="forModelId" class="form-label">Modelos</label>
+                        <select class="form-select" id="forModelId" name="forModelId" required>
+                        <option selected disabled value="">Elija...</option>
+                        <% model.forEach(element => { %>
+                          <option value="<%= element.id%>"><%= element.model%></option>
+                        <% }) %>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor seleccione el NODO donde esta instalado.
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-primary" type="submit">Crear Equipo</button>
+                    </div>
+                </form>
+            </div>
+            <script async src="/javascripts/validationForm.js"></script>
+            <!--<script async src="/javascripts/swalNodes.js"></script>-->
+            <%- include('./partials/footer') %>
