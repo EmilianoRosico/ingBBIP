@@ -52,7 +52,7 @@ module.exports = {
                     { association: "devicemodels" }
                 ]
             })
-            res.render('../views/devices', { title: 'Equipamiento BBIP', devices: devices });
+            res.render('../views/devices', { title: 'Equipamiento BBIP', devices: devices, page: 1, totalPages: 1 });
         } catch (error) {
             console.log(error)
         }
