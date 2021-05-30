@@ -2,9 +2,17 @@ const db = require('../database/models');
 
 module.exports = {
     nodes: async(req, res) => {
+        let page = Number(req.params.pag == undefined || req.params.pag < 1 ? 1 : req.params.pag)
+        let totalPages = Math.ceil(await db.nodes.count() / 10);
         try {
-            const nodes = await db.nodes.findAll()
-            res.render('../views/nodes', { title: 'Nodos BBIP', nodes: nodes });
+            const nodes = await db.nodes.findAll({
+                limit: 10,
+                offset: (10 * (page - 1)),
+                order: [
+                    ['name', 'ASC']
+                ]
+            })
+            res.render('../views/nodes', { title: 'Nodos BBIP', nodes: nodes, page: page, totalPages: totalPages });
         } catch (error) {
             console.log(error)
         }
@@ -37,7 +45,13 @@ module.exports = {
     },
     nodeDetail: async(req, res) => {
         try {
-            const devices = await db.devices.findAll({ where: { nodesId: req.params.id }, include: [{ association: "nodes" }, { association: "devicemodels" }] })
+            const devices = await db.devices.findAll({
+                where: { nodesId: req.params.id },
+                include: [
+                    { association: "nodes" },
+                    { association: "devicemodels" }
+                ]
+            })
             res.render('../views/devices', { title: 'Equipamiento BBIP', devices: devices });
         } catch (error) {
             console.log(error)

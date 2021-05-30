@@ -1,14 +1,23 @@
 const db = require('../database/models');
-const Swal = require('sweetalert2')
 
 module.exports = {
     devices: async(req, res) => {
         //Manejo del paginado
-        let page = req.params.pag == undefined ? 1 : req.params.pag
-        let offset = req.params.offset == undefined ? 10 : req.params.offset
+        let page = Number(req.params.pag == undefined || req.params.pag < 1 ? 1 : req.params.pag)
+        let totalPages = Math.ceil(await db.devices.count() / 10);
         try {
-            const devices = await db.devices.findAll({ limit: 10, offset: (offset * (page - 1)), include: [{ association: "nodes" }, { association: "devicemodels" }] })
-            res.render('../views/devices', { title: 'Equipamiento BBIP', devices: devices });
+            const devices = await db.devices.findAll({
+                limit: 10,
+                offset: (10 * (page - 1)),
+                include: [
+                    { association: "nodes" },
+                    { association: "devicemodels" }
+                ],
+                order: [
+                    ['name', 'ASC']
+                ]
+            })
+            res.render('../views/devices', { title: 'Equipamiento BBIP', devices: devices, page: page, totalPages: totalPages });
         } catch {
             (error => console.log(error))
         }
@@ -16,7 +25,11 @@ module.exports = {
     },
     add: async(req, res) => {
         try {
-            const nodes = await db.nodes.findAll();
+            const nodes = await db.nodes.findAll({
+                order: [
+                    ['name', 'ASC']
+                ]
+            });
             const version = await db.versions.findAll();
             const model = await db.devicemodels.findAll();
             const role = await db.deviceroles.findAll();
@@ -62,7 +75,11 @@ module.exports = {
         try {
             const device = await db.devices.findByPk(req.params.id)
             if (device != null) {
-                const nodes = await db.nodes.findAll();
+                const nodes = await db.nodes.findAll({
+                    order: [
+                        ['name', 'ASC']
+                    ]
+                });
                 const version = await db.versions.findAll();
                 const model = await db.devicemodels.findAll();
                 const role = await db.deviceroles.findAll();
@@ -132,8 +149,18 @@ module.exports = {
     //Genera consultas a la DB para mostrar la información de un DEVICE. Slots filtra los slots existentes en el DEVICE.
     detail: async(req, res) => {
         try {
-            const device = await db.devices.findOne({ where: { id: req.params.id }, include: [{ association: "nodes" }, { association: "devicemodels" }] })
-            const slots = await db.ports.findAll({ where: { deviceId: req.params.id }, attributes: ['slot'], group: 'slot' })
+            const device = await db.devices.findOne({
+                where: { id: req.params.id },
+                include: [
+                    { association: "nodes" },
+                    { association: "devicemodels" }
+                ]
+            })
+            const slots = await db.ports.findAll({
+                where: { deviceId: req.params.id },
+                attributes: ['slot'],
+                group: 'slot'
+            })
             const ports = await db.ports.findAll({
                 where: { deviceId: req.params.id },
                 order: [
