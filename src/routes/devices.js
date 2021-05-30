@@ -13,6 +13,7 @@ router.get('/detail/:id', devicesController.detail);
 router.post('/edit/port/releasePort', devicesController.releasePort)
 router.get('/edit/port/:id', devicesController.editPort);
 router.post('/edit/port/:id', devicesController.editPortPost);
+router.get('/:pag', devicesController.devices);
 
 
 
