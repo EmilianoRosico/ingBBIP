@@ -199,7 +199,7 @@ module.exports = {
                     boardModule: req.body.boardModule,
                     espejado: req.body.espejado,
                     clientSide: req.body.clientSide,
-                    editedByUser: "Emi Edit",
+                    editedByUser: res.locals.user,
 
                 }, {
                     where: { id: req.params.id }
@@ -225,7 +225,7 @@ module.exports = {
                     license: 0,
                     espejado: '',
                     clientSide: '',
-                    editedByUser: "Emi Edit",
+                    editedByUser: res.locals.user,
 
                 }, {
                     where: { id: req.body.id }

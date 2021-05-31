@@ -1,11 +1,10 @@
-const db = require('../database/models');
 const { auth } = require('../ldap-auth')
 
 module.exports = {
-    showLogin: async(req, res) => {
+    showLogin: (req, res) => {
         res.render('login', { title: "Login Web Ing BBIP", error: false })
     },
-    postLogin: async(req, res) => {
+    postLogin: (req, res) => {
         auth(req.body.username, req.body.password).then(result => {
             if (result == 'InvalidCredentialsError') {
                 res.render('login', { title: "Login Web Ing BBIP", error: true })
@@ -18,12 +17,9 @@ module.exports = {
                 });
                 req.session.user = obj.CN
                 res.redirect('/index')
-                    //res.render('login', { title: "Login Web Ing BBIP" })
             }
         }).catch(error => {
-
-            //res.send("Se presento un error" + error)
-            //console.log("error:" + error);
+            console.log("error:" + error);
         })
     }
 }
