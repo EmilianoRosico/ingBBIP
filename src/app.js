@@ -12,6 +12,7 @@ var devicesRouter = require('./routes/devices')
 var nodesRouter = require('./routes/nodes')
 var nsoRouter = require('./routes/nso')
 var versionsRouter = require('./routes/versions')
+var redirectLogin = require('./middlewares/redirectLogin');
 
 
 var app = express();
@@ -33,11 +34,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.use('/', indexRouter);
-app.use('/devices', devicesRouter)
-app.use('/nodes', nodesRouter)
+app.use('/devices', redirectLogin, devicesRouter)
+app.use('/nodes', redirectLogin, nodesRouter)
 app.use('/users', usersRouter);
-app.use('/nso', nsoRouter);
-app.use('/versions', versionsRouter);
+app.use('/nso', redirectLogin, nsoRouter);
+app.use('/versions', redirectLogin, versionsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

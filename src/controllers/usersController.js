@@ -7,10 +7,16 @@ module.exports = {
     },
     postLogin: async(req, res) => {
         auth(req.body.username, req.body.password).then(result => {
-            console.log(result);
             if (result == 'InvalidCredentialsError') {
                 res.render('login', { title: "Login Web Ing BBIP", error: true })
             } else {
+                var properties = result.split(',');
+                var obj = {};
+                properties.forEach(function(property) {
+                    var tup = property.split('=');
+                    obj[tup[0]] = tup[1];
+                });
+                req.session.user = obj.CN
                 res.redirect('/index')
                     //res.render('login', { title: "Login Web Ing BBIP" })
             }
