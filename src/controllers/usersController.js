@@ -21,5 +21,11 @@ module.exports = {
         }).catch(error => {
             console.log("error:" + error);
         })
-    }
+    },
+    logout: (req, res) => {
+        req.session.destroy(function(err) {
+            // cannot access session here
+        })
+        res.redirect('/')
+    },
 }
