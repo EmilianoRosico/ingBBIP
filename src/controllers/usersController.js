@@ -7,8 +7,10 @@ module.exports = {
     },
     postLogin: (req, res) => {
         auth(req.body.username, req.body.password).then(result => {
-            if (result == 'InvalidCredentialsError') {
-                res.render('login', { title: "Login Web Ing BBIP", error: true });
+            if (result == 'El servidor de AD no es alcanzable...') {
+                res.render('login', { title: "Login Web Ing BBIP", error: 'El servidor de AD no es alcanzable...' });
+            } else if (result == 'InvalidCredentialsError') {
+                res.render('login', { title: "Login Web Ing BBIP", error: 'Credenciales Invalidas.' });
             } else {
                 var properties = result.split(',');
                 var obj = {};

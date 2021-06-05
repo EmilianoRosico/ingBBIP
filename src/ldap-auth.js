@@ -30,7 +30,15 @@ async function auth(username, password) {
         //});
         //console.log(obj.CN);
     } catch (error) {
-        let falla = 'InvalidCredentialsError';
+        //console.log(error.admin.lde_message);
+        let falla = ''
+        if (error.admin) {
+            if (error.admin.lde_message == 'connection timeout') {
+                falla = 'El servidor de AD no es alcanzable...';
+            }
+        } else {
+            falla = 'InvalidCredentialsError';
+        }
         return falla
     }
 
