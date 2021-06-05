@@ -28,8 +28,8 @@
                     <div class="col-sm border">
                         Model
                     </div>
-                    <div class="col-sm border">
-                        Status
+                    <div class="col-sm border status">
+                        <b>Status</b>
                     </div>
                     <div class="col-sm border">
                         Actions
@@ -68,6 +68,7 @@
                         </div>
                     </div>
                     <%});%>
+
             </div>
             <nav aria-label="Page navigation">
                 <ul class="pagination justify-content-center">
@@ -88,4 +89,17 @@
                 </ul>
             </nav>
             <script src="/javascripts/swalDevices.js"></script>
+            <script type="text/javascript">
+                document.querySelector(".status").onclick = function() {
+                    let a = document.documentURI.split('=')
+                    if (a[1] == 'Desinstalado') {
+                        location.href = location.href = "/devices?status=Proyectado%20Instalar";
+                    } else if (a[1] == 'Proyectado%20Instalar') {
+                        //location.href = location.href = "/devices?status=Desinstalado";
+                        location.href = location.href = "/devices?status=En%20Servicio";
+                    } else {
+                        location.href = location.href = "/devices?status=Desinstalado";
+                    }
+                };
+            </script>
             <%- include('./partials/footer') %>

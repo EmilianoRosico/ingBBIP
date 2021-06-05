@@ -1,7 +1,11 @@
 const db = require('../database/models');
+const { Op } = require("sequelize");
+const fs = require('fs')
 
 module.exports = {
     devices: async(req, res) => {
+        //Manejo del filtro por status
+        let status = req.query.status == undefined ? 'En Servicio' : req.query.status;
         //Manejo del paginado
         let totalPages = Math.ceil(await db.devices.count() / 10);
         let page = Number(req.params.pag == undefined || req.params.pag < 1 || req.params.pag > totalPages ? 1 : req.params.pag)
@@ -15,7 +19,8 @@ module.exports = {
                 ],
                 order: [
                     ['name', 'ASC']
-                ]
+                ],
+                where: { status: status }
             })
             res.render('../views/devices', { title: 'Equipamiento BBIP', devices: devices, page: page, totalPages: totalPages });
         } catch {
@@ -59,6 +64,9 @@ module.exports = {
                     virtual: req.body.virtual == 'on' ? 1 : 0,
                     VersionId: req.body.version
                 })
+                var message = new Date().toISOString() + " : " + req.session.user + " add " + req.body.name + " Device.\n";
+                var devicesStream = fs.createWriteStream("./src/Logs/devices.log", { 'flags': 'a' });
+                devicesStream.write(message)
                 res.redirect('/devices/detail/' + node.id)
             } else {
                 res.render('somethingWrong', { title: 'SomethingWrong', error: 'El equipo que desea agregar ya existe!' })
@@ -75,14 +83,11 @@ module.exports = {
         try {
             const device = await db.devices.findByPk(req.params.id)
             if (device != null) {
-                const nodes = await db.nodes.findAll({
-                    order: [
-                        ['name', 'ASC']
-                    ]
-                });
+                const nodes = await db.nodes.findAll({});
                 const version = await db.versions.findAll();
                 const model = await db.devicemodels.findAll();
                 const role = await db.deviceroles.findAll();
+                console.log(nodes)
                 res.render('../views/editDevice', { title: 'Editar ' + device.name, device: device, nodes: nodes, version: version, model: model, role: role });
             } else {
                 console.log('***************************************');
@@ -117,6 +122,9 @@ module.exports = {
                 }, {
                     where: { id: req.params.id }
                 })
+                var message = new Date().toISOString() + " : " + req.session.user + " edit " + req.body.name + " Device.\n";
+                var devicesStream = fs.createWriteStream("./src/Logs/devices.log", { 'flags': 'a' });
+                devicesStream.write(message)
                 res.redirect('/devices')
             } else {
                 res.render('somethingWrong', { title: 'SomethingWrong', error: 'El equipo que desea agregar NO existe!' })
@@ -135,6 +143,9 @@ module.exports = {
                 await db.devices.destroy({
                     where: { id: req.body.id }
                 })
+                var message = new Date().toISOString() + " : " + req.session.user + " delete " + nodeExist.name + " Device.\n";
+                var devicesStream = fs.createWriteStream("./src/Logs/devices.log", { 'flags': 'a' });
+                devicesStream.write(message)
                 res.redirect('/devices')
             } else {
                 res.redirect('/devices')
@@ -149,6 +160,8 @@ module.exports = {
     //Genera consultas a la DB para mostrar la información de un DEVICE. Slots filtra los slots existentes en el DEVICE.
     detail: async(req, res) => {
         try {
+            //Manejo del filtro por status
+            let status = req.query.status == undefined ? 'Asignado' : req.query.status;
             const device = await db.devices.findOne({
                 where: { id: req.params.id },
                 include: [
@@ -162,7 +175,13 @@ module.exports = {
                 group: 'slot'
             })
             const ports = await db.ports.findAll({
-                where: { deviceId: req.params.id },
+                where: {
+                    deviceId: req.params.id,
+                    [Op.or]: [
+                        { status: status },
+                        { status: 'Libre' }
+                    ]
+                },
                 order: [
                     ['subslot', 'ASC'],
                     ['port', 'ASC']

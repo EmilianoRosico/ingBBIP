@@ -109,7 +109,7 @@
                                         <div class="col-1 border">
                                             Puerto
                                         </div>
-                                        <div class="col-1 border">
+                                        <div class="col-1 border status">
                                             Estado
                                         </div>
                                         <div class="col-1 border">
@@ -183,6 +183,18 @@
                 function MM_openBrWindow(theURL, winName, features) { //v2.0
                     window.open(theURL, winName, features);
                 }
+
+                let array = document.querySelectorAll(".status")
+                array.forEach(element => {
+                    element.onclick = function() {
+                        let a = document.documentURI.split('=')
+                        if (a[1] == 'Libre') {
+                            location.href = location.href = "/devices/detail/<%=device.id%>?status=Asignado";
+                        } else {
+                            location.href = location.href = "/devices/detail/<%=device.id%>?status=Libre";
+                        }
+                    };
+                });
             </script>
             <script src="/javascripts/swalDevicesPort.js"></script>
             <%- include('./partials/footer') %>
