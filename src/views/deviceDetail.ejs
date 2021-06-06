@@ -17,6 +17,10 @@
                         <%= device.ipMgmt %>
                     </div>
                     <div class="col-sm">
+                        <strong>Lo10:</strong>
+                        <%= device.ipIgp %>
+                    </div>
+                    <div class="col-sm">
                         <strong>Nodo:</strong>
                         <a href="/nodes/<%=device.nodes.id%>">
                             <%= device.nodes.name %>
@@ -59,7 +63,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="col-sm">
-                        <strong>Jerarquia:</strong>
+                        <strong>BackOffice:</strong>
                         <%= device.hierarchy %>
                     </div>
                     <div class="col-sm">

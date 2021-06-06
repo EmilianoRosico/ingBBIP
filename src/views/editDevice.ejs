@@ -34,7 +34,7 @@
                     <div class="col-md-2">
                         <label for="node" class="form-label">Nodo</label>
                         <select class="form-select" id="node" name="node" required>
-                        <option selected disabled value="<%=device.nodesId%>"><%=nodes[device.nodesId-1].name%></option>
+                        <option selected disabled value="<%=device.nodesId%>"><%=device.nodes.name%></option>
                         <% nodes.forEach(element => { %>
                           <option value="<%= element.id%>"><%= element.name%></option>
                         <% }) %>
@@ -74,7 +74,7 @@
                     <div class="col-md-2">
                         <label for="model" class="form-label">Modelo</label>
                         <select class="form-select" id="model" name="model" required>
-                        <option selected disabled value="<%=device.modelsId%>"><%=model[device.modelsId-1].model%></option>
+                        <option selected disabled value="<%=device.modelsId%>"><%=device.devicemodels.model%></option>
                         <% model.forEach(element => { %>
                             <option value="<%= element.id%>"><%= element.model%></option>
                           <% }) %>
@@ -108,20 +108,21 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <label for="hierarchy" class="form-label">Jearquía</label>
+                        <label for="hierarchy" class="form-label">BackOffice</label>
                         <select class="form-select" id="hierarchy" name="hierarchy" required>
-                      <option selected disabled value="<%=device.hierarchy%>"><%=device.hierarchy%></option>
-                      <option value="Acceso">Acceso</option>
-                      <option value="Core">Core</option>
+                            <option selected disabled value="<%=device.hierarchy%>"><%=device.hierarchy%></option>
+                      <option value="CNOC">CNOC</option>
+                      <option value="SoporteIp">SoporteIp</option>
+                      <option value="SRAF">SRAF</option>
                       </select>
                         <div class="invalid-feedback">
-                            Por favor seleccione la jerarquía.
+                            Por favor seleccione el BackOffice correspondiente.
                         </div>
                     </div>
                     <div class="col-md-2">
                         <label for="role" class="form-label">Rol</label>
                         <select class="form-select" id="role" name="role" required>
-                        <option selected disabled value="<%=device.roleId%>"><%=role[device.modelsId-1].name%></option>
+                        <option selected disabled value="<%=device.roleId%>"><%=device.deviceroles.name%></option>
                         <% role.forEach(element => { %>
                             <option value="<%= element.id%>"><%= element.name%></option>
                           <% }) %>

@@ -7,9 +7,9 @@ module.exports = {
         //Manejo del filtro por status
         let status = req.query.status == undefined ? 'En Servicio' : req.query.status;
         //Manejo del paginado
-        let totalPages = Math.ceil(await db.devices.count() / 10);
         let page = Number(req.params.pag == undefined || req.params.pag < 1 || req.params.pag > totalPages ? 1 : req.params.pag)
         try {
+            let totalPages = Math.ceil(await db.devices.count() / 10);
             const devices = await db.devices.findAll({
                 limit: 10,
                 offset: (10 * (page - 1)),
@@ -81,13 +81,22 @@ module.exports = {
     },
     edit: async(req, res) => {
         try {
-            const device = await db.devices.findByPk(req.params.id)
+            const device = await db.devices.findByPk(req.params.id, {
+                include: [
+                    { association: "nodes" },
+                    { association: "devicemodels" },
+                    { association: "deviceroles" }
+                ]
+            })
             if (device != null) {
-                const nodes = await db.nodes.findAll({});
+                const nodes = await db.nodes.findAll({
+                    order: [
+                        ['name', 'ASC']
+                    ]
+                });
                 const version = await db.versions.findAll();
                 const model = await db.devicemodels.findAll();
                 const role = await db.deviceroles.findAll();
-                console.log(nodes)
                 res.render('../views/editDevice', { title: 'Editar ' + device.name, device: device, nodes: nodes, version: version, model: model, role: role });
             } else {
                 console.log('***************************************');
