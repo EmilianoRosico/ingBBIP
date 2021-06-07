@@ -2,7 +2,7 @@
 
     <body>
         <%- include('./partials/header') %>
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between ps-3">
                 <h3>
                     <%= device.name %>
                 </h3>
@@ -10,7 +10,7 @@
                     <a href="/devices/addSlot?id=<%=device.id%>"><span class="btn btn-primary ">Agregar Slot</span></a>
                 </div>
             </div>
-            <div class="d-flex border">
+            <div class="d-flex border ps-3">
                 <div class="col-md-3">
                     <div class="col-sm">
                         <strong>Lo25:</strong>
@@ -114,7 +114,7 @@
                                             Puerto
                                         </div>
                                         <div class="col-1 border status">
-                                            Estado
+                                            Estado <i class="fas fa-filter"></i>
                                         </div>
                                         <div class="col-1 border">
                                             Espejado

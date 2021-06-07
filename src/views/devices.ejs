@@ -2,7 +2,7 @@
 
     <body>
         <%- include('./partials/header') %>
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between ps-3">
                 <h1>
                     <%= title %>
                 </h1>
@@ -11,28 +11,28 @@
                 </div>
             </div>
 
-            <div class="container ">
-                <div class="row border">
+            <div class="container">
+                <div class="row border fw-bold">
                     <div class="col-sm border">
-                        Name
+                        Acrónimo
                     </div>
                     <div class="col-sm border">
                         IPMgmt
                     </div>
                     <div class="col-sm border">
-                        Node
+                        Nodo
                     </div>
                     <div class="col-sm border">
-                        Vendor
+                        Vendedor
                     </div>
                     <div class="col-sm border">
-                        Model
+                        Modelo
                     </div>
                     <div class="col-sm border status">
-                        <b>Status</b>
+                        Estado <i class="fas fa-filter"></i>
                     </div>
                     <div class="col-sm border">
-                        Actions
+                        Acciones
                     </div>
                 </div>
                 <% devices.forEach(element=> { %>
