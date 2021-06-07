@@ -1,0 +1,54 @@
+<%- include('./partials/head') %>
+
+    <body>
+        <%- include('./partials/header') %>
+            <div class="d-flex justify-content-between">
+                <h1>
+                    <%= title %>
+                </h1>
+            </div>
+            <div class="container-fluid">
+                <form class="row g-3 needs-validation nodes" action="/devices/addSlot" method="POST" novalidate>
+                    <input type="text" name="deviceId" hidden value="<%=id%>">
+                    <input type="text" name="status" hidden value="Libre">
+                    <div class="col-md-1">
+                        <label for="slot" class="form-label">Slot</label>
+                        <input type="number" class="form-control" id="slot" name="slot" required>
+                        <div class="invalid-feedback">
+                            Por favor ingresa el slot de la placa.
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <label for="subSlot" class="form-label">Sub Slot</label>
+                        <input type="number" class="form-control" id="subSlot" name="subSlot" required>
+                        <div class="invalid-feedback">
+                            Por favor ingresa sub slot de la placa.
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="port" class="form-label">Cantidad de puertos</label>
+                        <input type="number" class="form-control" id="port" name="port" required>
+                        <div class="invalid-feedback">
+                            Por favor ingresa la cantidad de puertos para el sub slot.
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="boardModule" class="form-label">Tipo de puerto</label>
+                        <select class="form-select" id="boardModule" name="boardModule" required>
+                            <option selected disabled value="">Elija...</option>
+                            <option value="SPF-1G">SPF-1G</option>
+                            <option value="SPF-10G">SPF-10G</option>
+                            <option value="SPF-100G">SPF-100G</option>
+                            </select>
+                        <div class="invalid-feedback">
+                            Por favor selecciona tipo de puerto.
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-primary" type="submit">Crear Slot</button>
+                    </div>
+                </form>
+            </div>
+            <script async src="/javascripts/validationForm.js"></script>
+            <!--<script async src="/javascripts/swalNodes.js"></script>-->
+            <%- include('./partials/footer') %>

@@ -201,6 +201,49 @@ module.exports = {
             (error => console.log(error))
         }
     },
+    addSlotGet: (req, res) => {
+        res.render('../views/addSlot', { title: 'Agregar Slot', id: req.query.id });
+    },
+    addSlotPost: async(req, res) => {
+        try {
+            const checkSlotExist = await db.ports.findAll({
+                where: {
+                    deviceId: req.body.deviceId,
+                    slot: req.body.slot
+                },
+                attributes: ['slot'],
+                group: 'slot'
+            })
+            if (checkSlotExist.length == 0) {
+                let portArray = []
+                for (let port = 0; port < req.body.port; port++) {
+                    portArray.push({
+                        deviceId: req.body.deviceId,
+                        status: req.body.status,
+                        slot: req.body.slot,
+                        subSlot: req.body.subSlot,
+                        boardModule: req.body.boardModule,
+                        port: port,
+                        project: '',
+                        license: 0,
+                        espejado: '',
+                        clientSide: '',
+                        editedByUser: res.locals.user,
+                    })
+
+                }
+                await db.ports.bulkCreate(portArray)
+                res.redirect('/devices/detail/' + req.body.deviceId)
+            } else {
+                res.redirect('/devices/detail/' + req.body.deviceId)
+                console.log("************************************************")
+                console.log("El SLOT " + req.body.slot + " ya existe!")
+                console.log("************************************************")
+            }
+        } catch (error) {
+
+        }
+    },
     editPort: async(req, res) => {
         try {
             const port = await db.ports.findByPk(req.params.id)
