@@ -67,9 +67,9 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.BIGINT.UNSIGNED,
             allowNull: false
         },
-        createdAt: { type: dataTypes.DATE, defaultValue: dataTypes.NOW },
-        updatedAt: { type: dataTypes.DATE, defaultValue: dataTypes.NOW },
-        deletedAt: { type: dataTypes.DATE },
+        createdAt: { type: dataTypes.DATEONLY, defaultValue: dataTypes.NOW },
+        updatedAt: { type: dataTypes.DATEONLY, defaultValue: dataTypes.NOW },
+        deletedAt: { type: dataTypes.DATEONLY },
     }, {
         paranoid: true,
     })

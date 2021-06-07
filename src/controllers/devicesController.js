@@ -215,6 +215,7 @@ module.exports = {
                 group: 'slot'
             })
             if (checkSlotExist.length == 0) {
+                //Crea un array que es utilizado para la carga en bulk a la DB.
                 let portArray = []
                 for (let port = 0; port < req.body.port; port++) {
                     portArray.push({
@@ -232,6 +233,7 @@ module.exports = {
                     })
 
                 }
+                //Hace una creación en bulk con el array anteriormente creado.
                 await db.ports.bulkCreate(portArray)
                 res.redirect('/devices/detail/' + req.body.deviceId)
             } else {
