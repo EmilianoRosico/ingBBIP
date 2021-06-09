@@ -25,7 +25,8 @@ app.use(logger('dev'));
 app.use(session({
     secret: "Claro2021",
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: { maxAge: 3600000 }
 }));
 app.use(methodOverride('_method'))
 app.use(express.json());
