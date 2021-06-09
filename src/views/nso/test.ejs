@@ -1,0 +1,41 @@
+<%- include('./../partials/head') %>
+
+    <body>
+        <%- include('./../partials/header') %>
+            <div class="d-flex justify-content-between">
+                <h1>
+                    <%= title %>
+                </h1>
+            </div>
+            <div class="container-fluid">
+                <form class="row g-3 needs-validation nodes" action="/nso/test" method="POST" novalidate>
+                    <div class="col-md-1">
+                        <label for="id" class="form-label">Número Loopback</label>
+                        <input type="number" class="form-control" id="id" name="id" required>
+                        <div class="invalid-feedback">
+                            Por favor ingresa el número de Loopback.
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="ip" class="form-label">Ip</label>
+                        <input type="text" class="form-control" id="ip" name="ip" required>
+                        <div class="invalid-feedback">
+                            Por favor ingresa la IP.
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="mask" class="form-label">Mascara</label>
+                        <input type="text" class="form-control" id="mask" name="mask" required>
+                        <div class="invalid-feedback">
+                            Por favor ingresa la mascara.
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-primary" type="submit">Crear Loopback</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+            <script async src="/javascripts/validationForm.js"></script>
+
+            <%- include('./../partials/footer') %>

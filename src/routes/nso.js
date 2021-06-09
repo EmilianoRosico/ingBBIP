@@ -4,6 +4,8 @@ var router = express.Router();
 
 router.get('/devices', nsoController.devices);
 router.get('/services', nsoController.services);
+router.get('/test', nsoController.showTest);
+router.post('/test', nsoController.test);
 
 
 

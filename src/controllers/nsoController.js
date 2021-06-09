@@ -37,4 +37,26 @@ module.exports = {
             (error => console.log(error))
         }
     },
+    showTest: (req, res) => {
+        res.render('../views/nso/test', { title: 'Test creación NSO' });
+    },
+    test: async(req, res) => {
+        var request = require('request');
+        var options = {
+            'method': 'PATCH',
+            'url': 'http://10.2.205.132:8080/restconf/data/devices/device=TC2471-LAB-01/config/tailf-ned-cisco-ios-xr:interface/Loopback',
+            'headers': {
+                'Accept': 'application/yang-data+json',
+                'Content-Type': 'application/yang-data+json',
+                'Authorization': 'Basic YWRtaW46YWRtaW4='
+            },
+            body: JSON.stringify({ "tailf-ned-cisco-ios-xr:Loopback": { "id": req.body.id, "ipv4": { "address": { "ip": req.body.ip, "mask": req.body.mask } } } })
+
+        };
+        request(options, function(error, response) {
+            if (error) throw new Error(error);
+            console.log(response.body);
+        });
+        res.send('Se configuro Correctamente.')
+    }
 }
