@@ -8,6 +8,7 @@ router.post('/add', devicesController.addPost);
 router.get('/devicesFetch', devicesController.devicesFetch);
 router.get('/addSlot', devicesController.addSlotGet);
 router.post('/addSlot', devicesController.addSlotPost);
+router.post('/addSubSlot', devicesController.addSubSlotPost)
 router.get('/edit/:id', devicesController.edit);
 router.post('/edit/:id', devicesController.editPost);
 router.post('/disable', devicesController.disable);

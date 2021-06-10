@@ -202,14 +202,21 @@ module.exports = {
         }
     },
     addSlotGet: (req, res) => {
-        res.render('../views/addSlot', { title: 'Agregar Slot', id: req.query.id });
+        res.render('../views/addSlot', { title: 'Agregar Slot', id: req.query.id, subSlot: 0 });
     },
     addSlotPost: async(req, res) => {
+        if (req.body.subSlot <= 0 || req.body.slot < 0 || req.body.subSlot == undefined) {
+            res.redirect('/devices/addSlot?id=' + req.query.id);
+        } else {
+            res.render('../views/addSlot', { title: 'Agregar Slot', id: req.query.id, slot: req.body.slot, subSlot: req.body.subSlot });
+        }
+    },
+    addSubSlotPost: async(req, res) => {
         try {
             const checkSlotExist = await db.ports.findAll({
                 where: {
                     deviceId: req.body.deviceId,
-                    slot: req.body.slot
+                    slot: req.body.slotAssigned
                 },
                 attributes: ['slot'],
                 group: 'slot'
@@ -217,21 +224,22 @@ module.exports = {
             if (checkSlotExist.length == 0) {
                 //Crea un array que es utilizado para la carga en bulk a la DB.
                 let portArray = []
-                for (let port = 0; port < req.body.port; port++) {
-                    portArray.push({
-                        deviceId: req.body.deviceId,
-                        status: req.body.status,
-                        slot: req.body.slot,
-                        subSlot: req.body.subSlot,
-                        boardModule: req.body.boardModule,
-                        port: port,
-                        project: '',
-                        license: 0,
-                        espejado: '',
-                        clientSide: '',
-                        editedByUser: res.locals.user,
-                    })
-
+                for (let i = 0; i < req.body.subSlotAssigned.length; i++) {
+                    for (let port = 0; port < req.body.port[i]; port++) {
+                        portArray.push({
+                            deviceId: req.body.deviceId,
+                            status: "Libre",
+                            slot: req.body.slotAssigned,
+                            subSlot: req.body.subSlotAssigned[i],
+                            boardModule: req.body.boardModule[i],
+                            port: port,
+                            project: '',
+                            license: 0,
+                            espejado: '',
+                            clientSide: '',
+                            editedByUser: res.locals.user,
+                        })
+                    }
                 }
                 //Hace una creación en bulk con el array anteriormente creado.
                 await db.ports.bulkCreate(portArray)
@@ -239,7 +247,7 @@ module.exports = {
             } else {
                 res.redirect('/devices/detail/' + req.body.deviceId)
                 console.log("************************************************")
-                console.log("El SLOT " + req.body.slot + " ya existe!")
+                console.log("El SLOT " + req.body.slotAssigned + " ya existe!")
                 console.log("************************************************")
             }
         } catch (error) {
@@ -273,7 +281,6 @@ module.exports = {
                     espejado: req.body.espejado,
                     clientSide: req.body.clientSide,
                     editedByUser: res.locals.user,
-
                 }, {
                     where: { id: req.params.id }
                 })
