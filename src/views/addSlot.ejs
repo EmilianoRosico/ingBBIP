@@ -32,6 +32,7 @@
                 <%} else {%>
                     <div class="container-fluid">
                         <form class="g-3 needs-validation nodes" action="/devices/addSubSlot" method="POST" novalidate>
+                            <!--Se agregan estos campos escondidos por que el value con disable no viaja en el req.body-->
                             <input type="text" name="deviceId" hidden value="<%=id%>">
                             <input name="slotAssigned" value="<%=slot%>" hidden>
                             <% for( let index = 0; index < subSlot; index++ ) { %>

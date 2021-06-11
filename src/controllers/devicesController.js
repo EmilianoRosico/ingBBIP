@@ -222,16 +222,17 @@ module.exports = {
                 group: 'slot'
             })
             if (checkSlotExist.length == 0) {
+
                 //Crea un array que es utilizado para la carga en bulk a la DB.
                 let portArray = []
-                for (let i = 0; i < req.body.subSlotAssigned.length; i++) {
-                    for (let port = 0; port < req.body.port[i]; port++) {
+                if (req.body.subSlotAssigned.length == 1) {
+                    for (let port = 0; port < req.body.port; port++) {
                         portArray.push({
                             deviceId: req.body.deviceId,
                             status: "Libre",
                             slot: req.body.slotAssigned,
-                            subSlot: req.body.subSlotAssigned[i],
-                            boardModule: req.body.boardModule[i],
+                            subSlot: req.body.subSlotAssigned,
+                            boardModule: req.body.boardModule,
                             port: port,
                             project: '',
                             license: 0,
@@ -239,6 +240,24 @@ module.exports = {
                             clientSide: '',
                             editedByUser: res.locals.user,
                         })
+                    }
+                } else {
+                    for (let i = 0; i < req.body.subSlotAssigned.length; i++) {
+                        for (let port = 0; port < req.body.port[i]; port++) {
+                            portArray.push({
+                                deviceId: req.body.deviceId,
+                                status: "Libre",
+                                slot: req.body.slotAssigned,
+                                subSlot: req.body.subSlotAssigned[i],
+                                boardModule: req.body.boardModule[i],
+                                port: port,
+                                project: '',
+                                license: 0,
+                                espejado: '',
+                                clientSide: '',
+                                editedByUser: res.locals.user,
+                            })
+                        }
                     }
                 }
                 //Hace una creación en bulk con el array anteriormente creado.
