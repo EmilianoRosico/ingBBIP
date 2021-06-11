@@ -181,7 +181,10 @@ module.exports = {
             const slots = await db.ports.findAll({
                 where: { deviceId: req.params.id },
                 attributes: ['slot'],
-                group: 'slot'
+                group: 'slot',
+                order: [
+                    ['slot', 'ASC']
+                ]
             })
             const ports = await db.ports.findAll({
                 where: {
