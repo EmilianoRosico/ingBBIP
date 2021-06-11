@@ -1,4 +1,5 @@
 const db = require('../database/models');
+var request = require('request');
 
 module.exports = {
     nodes: async(req, res) => {
@@ -52,7 +53,19 @@ module.exports = {
                     { association: "devicemodels" }
                 ]
             })
-            res.render('../views/devices', { title: 'Equipamiento BBIP', devices: devices, page: 1, totalPages: 1 });
+            var options = {
+                'method': 'GET',
+                'url': `http://intraoperativa.claro.amx/intranet/calidad/calidad1/api/wsnoc/sitios/datos/${devices[0].nodes.cellId}`,
+                'headers': {
+                    'Cookie': 'laravel_session=d8zDeVnPnSj8iUhoOTmQ6LLx4SCOJKl6cNRHGaLL; XSRF-TOKEN=eyJpdiI6IlByZ21ZWHJqM1BlN3NuSktxTytkdWc9PSIsInZhbHVlIjoicWNiZmdPVWVYNVlEOFJONnFObkczT3dMYWxzMmpaYXdhTXhYR214WUg5Y3FHSFd3aDlJYk5uZVl4eHRVbmxOcCIsIm1hYyI6ImQ0OTg2ZTNkNGFiOTllZDUzNGZkNTVhNDgwYWQxM2VjNmZlNDBkODk2NTU2NmY5NGQ5YzU2MDEyNWVhYzNkMmMifQ%3D%3D'
+                }
+            };
+            request(options, function(error, response) {
+                if (error) throw new Error(error);
+                let data = JSON.parse(response.body);
+                data = (data.data.data_arr[0]);
+                res.render('../views/nodesDetail', { title: `Equipamiento BBIP en ${devices[0].nodes.name}`, devices: devices, page: 1, totalPages: 1, data: data });
+            });
         } catch (error) {
             console.log(error)
         }

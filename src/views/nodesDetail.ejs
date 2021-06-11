@@ -1,0 +1,116 @@
+<%- include('./partials/head') %>
+
+    <body>
+        <%- include('./partials/header') %>
+            <div class="d-flex justify-content-between ps-3">
+                <h1>
+                    <%= title %>
+                </h1>
+                <div class="d-flex align-items-center">
+                    <a href="/devices/add"><span class="btn btn-primary ">Agregar Equipo</span></a>
+                </div>
+            </div>
+            <section class="container-fluid d-flex">
+                <div class="col-3">
+                    <div class="container-fluid">
+                        <div class="fw-bold">Acrónimo:</div>
+                        <%=data.acronimo%>
+                            <div class="fw-bold">Cell Owner:</div>
+                            <a href="mailto:<%=data.cellowner %>">
+                                <%=data.cellowner %>
+                            </a>
+                            <div class="fw-bold">Dirección:</div>
+                            <%=data.calle %>
+                                <div class="fw-bold">Latitud:</div>
+                                <%=data.latitud %>
+                                    <div class="fw-bold">Longitud:</div>
+                                    <%=data.longitud %>
+
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row border fw-bold">
+                        <div class="col-sm border">
+                            Acrónimo
+                        </div>
+                        <div class="col-sm border">
+                            IPMgmt
+                        </div>
+                        <div class="col-sm border">
+                            Vendedor
+                        </div>
+                        <div class="col-sm border">
+                            Modelo
+                        </div>
+                        <div class="col-sm border status">
+                            Estado <i class="fas fa-filter"></i>
+                        </div>
+                        <div class="col-sm border">
+                            Acciones
+                        </div>
+                    </div>
+                    <% devices.forEach(element=> { %>
+                        <div class="row border">
+                            <div class="col-sm border">
+                                <a href="/devices/detail/<%= element.id %>">
+                                    <%= element.name %>
+                                </a>
+                            </div>
+                            <div class="col-sm border">
+                                <%= element.ipMgmt %>
+                            </div>
+                            <div class="col-sm border">
+                                <%= element.devicemodels.vendor %>
+                            </div>
+                            <div class="col-sm border">
+                                <%= element.devicemodels.model %>
+                            </div>
+                            <div class="col-sm border">
+                                <%= element.status %>
+                            </div>
+                            <div class=" d-flex justify-content-around col-sm border">
+                                <button><a href="/devices/edit/<%= element.id %>"><i class="fas fa-edit btn btn-primary"></i></a></button>
+                                <form class="deleteForm" action="/devices/disable" method="POST">
+                                    <input type="text" hidden value="<%=element.id %>" name="id">
+                                    <button type="submit" class=""><i class="fas fa-trash-alt btn btn-danger"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                        <%});%>
+
+                </div>
+            </section>
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item <%= page == 1?'disabled':''%>">
+                        <a class="page-link" href="/devices/<%=page-1%>" tabindex="-1" aria-disabled="true">Previous</a>
+                    </li>
+                    <% for( let i = 1; i<= totalPages; i++ ) { %>
+                        <li class="page-item ">
+                            <a class="page-link" href="/devices/<%=i%>">
+                                <%=i%>
+                            </a>
+                        </li>
+                        <% } %>
+
+                            <li class="page-item <%= page == totalPages?'disabled':''%>">
+                                <a class="page-link" href="/devices/<%=page+1%>">Next</a>
+                            </li>
+                </ul>
+            </nav>
+            <script src="/javascripts/swalDevices.js"></script>
+            <script type="text/javascript">
+                document.querySelector(".status").onclick = function() {
+                    let a = document.documentURI.split('=')
+                    if (a[1] == 'Desinstalado') {
+                        location.href = location.href = "/devices?status=Proyectado%20Instalar";
+                    } else if (a[1] == 'Proyectado%20Instalar') {
+                        //location.href = location.href = "/devices?status=Desinstalado";
+                        location.href = location.href = "/devices?status=En%20Servicio";
+                    } else {
+                        location.href = location.href = "/devices?status=Desinstalado";
+                    }
+                };
+            </script>
+            <%- include('./partials/footer') %>
