@@ -2,30 +2,48 @@
 
     <body>
         <div class="container-fluid">
-            <form class="needs-validation myForm" action="/users" method="POST" novalidate>
-                <div class="col-md">
-                    <!--<label for="username" class="form-label">Legajo</label>-->
-                    <input type="text" class="form-control input-lg" id="username" name="username" placeholder="cti12345" required>
-                    <div class="invalid-feedback">
-                        Por favor ingresa el nombre de usuario.
+            <div class="row">
+                <div class="small-12 medium-6 medium-offset-3 large-4 large-offset-4 columns panel">
+                    <!-- add tiny spacing because IE sucks and doesn't handle flexbox vertical centering correctly -->
+                    <br>
+
+                    <div class="row">
+                        <div class="small-12 columns text-center">
+                            <img class="img-responsive brand-logo ng-scope" alt="Logo" src="/images/logo_claro_200px.png">
+                        </div>
                     </div>
-                </div>
-                <div class="col-md">
-                    <!--<label for="password" class="form-label">Password</label>-->
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-                    <div class="invalid-feedback">
-                        Por favor ingresa la conraseña.
+
+                    <div class="row">
+                        <div class="small-12 columns text-center">
+                            <h2 class="mb0 h3 ng-binding">Web Ingeniería BBIP</h2>
+                            <h3 class="subheader mt0 h5 ng-binding">Bienvenido</h3>
+                        </div>
                     </div>
+                    <form class="needs-validation myForm" action="/users" method="POST" novalidate>
+                        <div class="col-md">
+                            <input type="text" class="form-control input-lg" id="username" name="username" placeholder="cti12345" required>
+                            <div class="invalid-feedback">
+                                Por favor ingresa el nombre de usuario.
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                            <div class="invalid-feedback">
+                                Por favor ingresa la conraseña.
+                            </div>
+                        </div>
+                        <p style="margin-top: .25rem;
+                        font-size: .375em;
+                        color: #dc3545;">
+                            <%=error?error:''%>
+                        </p>
+                        <div class="col-12">
+                            <button class="btn-lg btn-primary" type="submit">Login</button>
+                        </div>
+                    </form>
                 </div>
-                <p style="margin-top: .25rem;
-                font-size: .575em;
-                color: #dc3545;">
-                    <%=error?error:''%>
-                </p>
-                <div class="col-12">
-                    <button class="btn-lg btn-primary" type="submit">Login</button>
-                </div>
-            </form>
+            </div>
+
         </div>
         <script async src="/javascripts/validationForm.js"></script>
     </body>
