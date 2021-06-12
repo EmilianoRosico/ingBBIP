@@ -10,54 +10,47 @@
                     <a href="/versions/add"><span class="btn btn-primary">Agregar Versión</span></a>
                 </div>
             </div>
-
-            <div class="container ">
-                <div class="row border">
-                    <div class="col-sm border">
-                        Name
-                    </div>
-                    <div class="col-sm border">
-                        ServicePack
-                    </div>
-                    <div class="col-sm border">
-                        Smu/Patch
-                    </div>
-                    <div class="col-sm border">
-                        Roles
-                    </div>
-                    <div class="col-sm border">
-                        Modelos
-                    </div>
-                    <div class="col-sm-3 border">
-                        Link PSRR
-                    </div>
-                </div>
-                <% versions.forEach(element=> { %>
-                    <div class="row border">
-                        <div class="col-sm border">
-                            <a href="/versions/<%= element.id%>">
-                                <%= element.name %>
-                            </a>
-                        </div>
-                        <div class="col-sm border">
-                            <%= element.servicePack %>
-                        </div>
-                        <div class="col-sm border">
-                            <%= element.smuPatch %>
-                        </div>
-                        <div class="col-sm border">
-                            <%= element.versiontorole.name %>
-                        </div>
-                        <div class="col-sm border">
-                            <%= element.versiondevicemodels.model %>
-                        </div>
-                        <div class="col-sm-3 border">
-                            <a href="<%= element.psrrLink %>" target="_blank">
-                                Abrir PSRR
-                            </a>
-                        </div>
-                    </div>
-                    <%});%>
+            <div class="container">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="fw-bold">
+                            <th>Nombre</th>
+                            <th>ServicePack</th>
+                            <th>Smu/Patch</th>
+                            <th>Rol</th>
+                            <th>Modelos</th>
+                            <th>Link PSRR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% versions.forEach(element=> { %>
+                            <tr>
+                                <td>
+                                    <a href="/versions/<%= element.id%>">
+                                        <%= element.name %>
+                                    </a>
+                                </td>
+                                <td>
+                                    <%= element.servicePack %>
+                                </td>
+                                <td>
+                                    <%= element.smuPatch %>
+                                </td>
+                                <td>
+                                    <%= element.versiontorole.name %>
+                                </td>
+                                <td>
+                                    <%= element.versiondevicemodels.model %>
+                                </td>
+                                <td>
+                                    <a href="<%= element.psrrLink %>" target="_blank">
+                                        Abrir PSRR
+                                    </a>
+                                </td>
+                            </tr>
+                            <%});%>
+                    </tbody>
+                </table>
             </div>
             <nav aria-label="Page navigation">
                 <ul class="pagination justify-content-center">

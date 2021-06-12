@@ -1,7 +1,8 @@
 <%- include('./partials/head') %>
 
     <body>
-        <div class="container-fluid ps-3">
+        <h2 class="py-2">Edición del puerto:</h2>
+        <div class="container ps-3 py-2">
             <form class="row g-3 needs-validation" action="/devices/edit/port/<%= port.id %>" method="POST" novalidate>
                 <div class="col-md-4">
                     <label for="project" class="form-label">Proyecto/SOL</label>

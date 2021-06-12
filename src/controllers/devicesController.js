@@ -6,10 +6,10 @@ module.exports = {
     devices: async(req, res) => {
         //Manejo del filtro por status
         let status = req.query.status == undefined ? 'En Servicio' : req.query.status;
+        let totalPages = Math.ceil(await db.devices.count() / 10);
         //Manejo del paginado
         let page = Number(req.params.pag == undefined || req.params.pag < 1 || req.params.pag > totalPages ? 1 : req.params.pag)
         try {
-            let totalPages = Math.ceil(await db.devices.count() / 10);
             const devices = await db.devices.findAll({
                 limit: 10,
                 offset: (10 * (page - 1)),

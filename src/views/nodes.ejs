@@ -10,46 +10,41 @@
                     <a href="/nodes/add"><span class="btn btn-primary">Agregar Nodo</span></a>
                 </div>
             </div>
-
-            <div class="container ">
-                <div class="row border">
-                    <div class="col-sm border">
-                        Name
-                    </div>
-                    <div class="col-sm border">
-                        CellId
-                    </div>
-                    <div class="col-sm border">
-                        Province
-                    </div>
-                    <div class="col-sm border">
-                        Country
-                    </div>
-                    <div class="col-sm border">
-                        Rooms
-                    </div>
-                </div>
-                <% nodes.forEach(element=> { %>
-                    <div class="row border">
-                        <div class="col-sm border">
-                            <a href="/nodes/<%= element.id%>">
-                                <%= element.name %>
-                            </a>
-                        </div>
-                        <div class="col-sm border">
-                            <%= element.cellId %>
-                        </div>
-                        <div class="col-sm border">
-                            <%= element.province %>
-                        </div>
-                        <div class="col-sm border">
-                            <%= element.country %>
-                        </div>
-                        <div class="col-sm border">
-                            <%= element.totalRooms %>
-                        </div>
-                    </div>
-                    <%});%>
+            <div class="container">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="fw-bold">
+                            <th>Nombre</th>
+                            <th>CellId</th>
+                            <th>Provincia</th>
+                            <th>País</th>
+                            <th>Naves</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% nodes.forEach(element=> { %>
+                            <tr>
+                                <td>
+                                    <a href="/nodes/<%= element.id%>">
+                                        <%= element.name %>
+                                    </a>
+                                </td>
+                                <td>
+                                    <%= element.cellId %>
+                                </td>
+                                <td>
+                                    <%= element.province %>
+                                </td>
+                                <td>
+                                    <%= element.country %>
+                                </td>
+                                <td>
+                                    <%= element.totalRooms %>
+                                </td>
+                            </tr>
+                            <%});%>
+                    </tbody>
+                </table>
             </div>
             <nav aria-label="Page navigation">
                 <ul class="pagination justify-content-center">
@@ -63,7 +58,6 @@
                             </a>
                         </li>
                         <% } %>
-
                             <li class="page-item <%= page == totalPages?'disabled':''%>">
                                 <a class="page-link" href="/nodes/page/<%=page+1%>">Next</a>
                             </li>

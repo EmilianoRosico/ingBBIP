@@ -10,65 +10,57 @@
                     <a href="/devices/add"><span class="btn btn-primary ">Agregar Equipo</span></a>
                 </div>
             </div>
-
             <div class="container">
-                <div class="row border fw-bold">
-                    <div class="col-sm border">
-                        Acrónimo
-                    </div>
-                    <div class="col-sm border">
-                        IPMgmt
-                    </div>
-                    <div class="col-sm border">
-                        Nodo
-                    </div>
-                    <div class="col-sm border">
-                        Vendedor
-                    </div>
-                    <div class="col-sm border">
-                        Modelo
-                    </div>
-                    <div class="col-sm border status">
-                        Estado <i class="fas fa-filter"></i>
-                    </div>
-                    <div class="col-sm border">
-                        Acciones
-                    </div>
-                </div>
-                <% devices.forEach(element=> { %>
-                    <div class="row border">
-                        <div class="col-sm border">
-                            <a href="/devices/detail/<%= element.id %>">
-                                <%= element.name %>
-                            </a>
-                        </div>
-                        <div class="col-sm border">
-                            <%= element.ipMgmt %>
-                        </div>
-                        <div class="col-sm border">
-                            <a href="/nodes/<%=element.nodes.id%>">
-                                <%= element.nodes.name %>
-                            </a>
-                        </div>
-                        <div class="col-sm border">
-                            <%= element.devicemodels.vendor %>
-                        </div>
-                        <div class="col-sm border">
-                            <%= element.devicemodels.model %>
-                        </div>
-                        <div class="col-sm border">
-                            <%= element.status %>
-                        </div>
-                        <div class=" d-flex justify-content-around col-sm border">
-                            <button><a href="/devices/edit/<%= element.id %>"><i class="fas fa-edit btn btn-primary"></i></a></button>
-                            <form class="deleteForm" action="/devices/disable" method="POST">
-                                <input type="text" hidden value="<%=element.id %>" name="id">
-                                <button type="submit" class=""><i class="fas fa-trash-alt btn btn-danger"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                    <%});%>
-
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="fw-bold">
+                            <th>Acrónimo</th>
+                            <th>IPMgmt</th>
+                            <th>Nodo</th>
+                            <th>Vendedor</th>
+                            <th>Modelo</th>
+                            <th class="status">Estado <i class="fas fa-filter"></i></th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% devices.forEach(element=> { %>
+                            <tr>
+                                <td>
+                                    <a href="/devices/detail/<%= element.id %>">
+                                        <%= element.name %>
+                                    </a>
+                                </td>
+                                <td>
+                                    <%= element.ipMgmt %>
+                                </td>
+                                <td>
+                                    <a href="/nodes/<%=element.nodes.id%>">
+                                        <%= element.nodes.name %>
+                                    </a>
+                                </td>
+                                <td>
+                                    <%= element.devicemodels.vendor %>
+                                </td>
+                                <td>
+                                    <%= element.devicemodels.model %>
+                                </td>
+                                <td>
+                                    <%= element.status %>
+                                </td>
+                                <td>
+                                    <div class=" d-flex justify-content-around">
+                                        <button><a href="/devices/edit/<%= element.id %>"><i class="fas fa-edit btn btn-primary"></i></a></button>
+                                        <form class="deleteForm" action="/devices/disable" method="POST">
+                                            <input type="text" hidden value="<%=element.id %>" name="id">
+                                            <button type="submit" class=""><i class="fas fa-trash-alt btn btn-danger"></i></button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            <%});%>
+                    </tbody>
+                </table>
             </div>
             <nav aria-label="Page navigation">
                 <ul class="pagination justify-content-center">
@@ -88,6 +80,7 @@
                             </li>
                 </ul>
             </nav>
+
             <script src="/javascripts/swalDevices.js"></script>
             <script type="text/javascript">
                 document.querySelector(".status").onclick = function() {
