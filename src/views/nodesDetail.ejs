@@ -12,29 +12,30 @@
             </div>
             <section class="container-fluid d-flex">
                 <div class="col-3">
-                    <div class="container-fluid border">
-                        <div class="fw-bold">
-                            Acrónimo:
-                        </div>
-                        <%=data.acronimo%>
-                            <div class="fw-bold">
-                                Cell Owner:
-                            </div>
-                            <a href="mailto:<%=data.cellowner %>">
-                                <%=data.cellowner %>
-                            </a>
-                            <div class="fw-bold">
-                                Dirección:
-                            </div>
-                            <%=data.calle %>
-                                <div class="fw-bold">
-                                    Latitud:
+                    <div class="container-fluid">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div><strong>Acrónimo:</strong>
+                                    <%=data.acronimo%>
                                 </div>
-                                <%=data.latitud %>
-                                    <div class="fw-bold">
-                                        Longitud:
-                                    </div>
+                                <div><strong>Dirección:</strong>
+                                    <%=data.calle %>
+                                </div>
+                                <div><strong>Latitud:</strong>
+                                    <%=data.latitud %>
+                                </div>
+                                <div><strong>Longitud:</strong>
                                     <%=data.longitud %>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div> <strong>Cell Owner:</strong>
+                                    <a href="mailto:<%=data.cellowner %>">
+                                        <%=data.cellowner %>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="container">

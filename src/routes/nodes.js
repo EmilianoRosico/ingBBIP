@@ -10,4 +10,5 @@ router.get('/page/:pag', nodesController.nodes);
 router.get('/:id', nodesController.nodeDetail)
 
 
+
 module.exports = router;

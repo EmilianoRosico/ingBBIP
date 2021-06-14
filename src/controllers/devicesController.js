@@ -175,7 +175,8 @@ module.exports = {
                 where: { id: req.params.id },
                 include: [
                     { association: "nodes" },
-                    { association: "devicemodels" }
+                    { association: "devicemodels" },
+                    { association: "deviceroles" }
                 ]
             })
             const slots = await db.ports.findAll({

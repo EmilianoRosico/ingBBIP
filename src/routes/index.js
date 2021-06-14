@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+const db = require('../database/models');
+const { Op } = require("sequelize");
 
 /* GET home page. */
 router.get('/', (req, res) => {
@@ -8,5 +10,53 @@ router.get('/', (req, res) => {
 router.get('/index', function(req, res, next) {
     res.render('index', { title: 'Express' });
 });
+
+//BUSCADOR
+router.get('/search', async(req, res) => {
+    try {
+        const devices = await db.devices.findAll({
+            where: {
+                name: {
+                    [Op.like]: `%${req.query.search}%`
+                }
+            },
+            include: [
+                { association: "nodes" },
+                { association: "devicemodels" }
+            ],
+            order: [
+                ['name', 'ASC']
+            ]
+        })
+        const nodes = await db.nodes.findAll({
+            where: {
+                name: {
+                    [Op.like]: `%${req.query.search}%`
+                }
+            },
+            order: [
+                ['name', 'ASC']
+            ]
+        })
+        const versions = await db.versions.findAll({
+            where: {
+                name: {
+                    [Op.like]: `%${req.query.search}%`
+                }
+            },
+            order: [
+                ['name', 'ASC']
+            ],
+            include: [
+                { association: "versiontorole" },
+                { association: "versiondevicemodels" }
+            ]
+        })
+        console.log(devices);
+        res.render('../views/searchResult', { title: `Resultados de la busqueda ${req.query.search}`, devices: devices, nodes: nodes, versions: versions });
+    } catch (error) {
+        console.log(error)
+    }
+})
 
 module.exports = router;
