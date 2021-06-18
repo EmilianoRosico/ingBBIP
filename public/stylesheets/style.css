@@ -118,3 +118,7 @@ button {
 .font-small {
     font-size: 0.8rem;
 }
+
+.min-height {
+    min-height: 500px;
+}

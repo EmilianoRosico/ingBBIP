@@ -7,7 +7,11 @@
                     <%= device.name %>
                 </h3>
                 <div class="d-flex align-items-center">
-                    <a href="/devices/addSlot?id=<%=device.id%>"><span class="btn btn-primary ">Agregar Slot</span></a>
+                    <% if (sw) {%>
+                        <a href="/devices/vlans/<%=device.id%>"><span class="btn btn-secondary ">VLANs</span></a>
+                        <%}%>
+
+                            <a href="/devices/addSlot?id=<%=device.id%>"><span class="btn btn-primary ">Agregar Slot</span></a>
                 </div>
             </div>
             <div class="d-flex border ps-3">

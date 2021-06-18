@@ -1,6 +1,7 @@
 const db = require('../database/models');
 const { Op } = require("sequelize");
-const fs = require('fs')
+const fs = require('fs');
+const { log } = require('console');
 
 module.exports = {
     devices: async(req, res) => {
@@ -171,6 +172,7 @@ module.exports = {
         try {
             //Manejo del filtro por status
             let status = req.query.status == undefined ? 'Asignado' : req.query.status;
+            let sw = false
             const device = await db.devices.findOne({
                 where: { id: req.params.id },
                 include: [
@@ -200,7 +202,10 @@ module.exports = {
                     ['port', 'ASC']
                 ]
             })
-            res.render('../views/deviceDetail', { title: 'Detalle Equipamiento', device: device, ports: ports, slots: slots });
+            if (device.name.slice(5, 9) == '-SW-' || device.name.slice(6, 10) == '-SW-') {
+                sw = true
+            }
+            res.render('../views/deviceDetail', { title: 'Detalle Equipamiento', device: device, ports: ports, slots: slots, sw: sw });
         } catch {
             (error => console.log(error))
         }
@@ -342,6 +347,56 @@ module.exports = {
             }
         } catch (error) {
             console.log(error)
+        }
+    },
+    vlans: async(req, res) => {
+        try {
+            const device = await db.devices.findOne({
+                where: { id: req.params.id },
+                include: [
+                    { association: "nodes" },
+                    { association: "devicemodels" },
+                    { association: "deviceroles" }
+                ]
+            })
+            const vlans = await db.vlans.findAll({
+                where: { deviceVlanId: req.params.id },
+                order: [
+                    ['vlan', 'ASC']
+                ]
+            })
+            res.render('../views/deviceDetailVlans', { title: 'Detalle Equipamiento', device: device, vlans: vlans });
+        } catch (error) {
+            console.log(vlans);
+        }
+    },
+    addVlanGet: (req, res) => {
+        res.render('../views/addVlan', { title: 'Agregar Vlan', id: req.query.id });
+    },
+    addVlanPost: async(req, res) => {
+        try {
+            const checkVlanExist = await db.vlans.findAll({
+                where: {
+                    deviceVlanId: req.body.deviceId,
+                    vlan: req.body.vlan
+                }
+            })
+            if (checkVlanExist.length == 0) {
+                const vlan = await db.vlans.create({
+                    deviceVlanId: req.body.deviceId,
+                    name: req.body.name,
+                    vlan: req.body.vlan,
+                    editedByUser: res.locals.user,
+                })
+                res.redirect('/devices/vlans/' + req.body.deviceId)
+            } else {
+                res.redirect('/devices/detail/' + req.body.deviceId)
+                console.log("************************************************")
+                console.log("La VLAN " + req.body.vlan + " ya existe!")
+                console.log("************************************************")
+            }
+        } catch (error) {
+            console.log(error);
         }
     },
     devicesFetch: async(req, res) => {

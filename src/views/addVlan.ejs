@@ -1,0 +1,37 @@
+<%- include('./partials/head') %>
+
+    <body>
+        <%- include('./partials/header') %>
+            <div class="d-flex justify-content-between">
+                <h1>
+                    <%= title %>
+                </h1>
+            </div>
+            <div class="container min-height">
+                <form class="g-3 needs-validation nodes" action="/devices/addVlan" method="POST" novalidate>
+                    <!--Se agregan estos campos escondidos por que el value con disable no viaja en el req.body-->
+                    <input type="text" name="deviceId" hidden value="<%=id%>">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="vlan" class="form-label">Vlan ID</label>
+                            <input type="number" class="form-control" id="vlan" name="vlan" required>
+                            <div class="invalid-feedback">
+                                Por favor ingresa el VLAN ID.
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="name" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                            <div class="invalid-feedback">
+                                Por favor ingresa el nombre de la VLAN.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-primary" type="submit">Crear VLAN</button>
+                    </div>
+                </form>
+            </div>
+            <script async src="/javascripts/validationForm.js"></script>
+            <!--<script async src="/javascripts/swalNodes.js"></script>-->
+            <%- include('./partials/footer') %>
