@@ -9,7 +9,7 @@
             </div>
 
             <div class="container-fluid min-height">
-                <form class="row g-3 needs-validation" action="/devices/edit/<%=device.id%>" method="POST" novalidate>
+                <form class="row g-3 needs-validation devices" action="/devices/edit/<%=device.id%>" method="POST" novalidate>
                     <div class="col-md-2">
                         <label for="name" class="form-label">Acrónimo</label>
                         <input type="text" class="form-control" id="name" name="name" value="<%=device.name%>" required>
@@ -147,4 +147,5 @@
                 </form>
             </div>
             <script async src="/javascripts/validationForm.js"></script>
+            <script async src="/javascripts/swalDevicesAdd.js"></script>
             <%- include('./partials/footer') %>
