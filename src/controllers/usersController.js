@@ -23,7 +23,7 @@ module.exports = {
                 var loginStream = fs.createWriteStream("./src/Logs/logins.log", { 'flags': 'a' });
                 loginStream.write(message)
 
-                res.redirect('/index')
+                res.redirect('/')
             }
         }).catch(error => {
             console.log("error:" + error);

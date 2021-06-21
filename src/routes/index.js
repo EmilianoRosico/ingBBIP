@@ -4,12 +4,10 @@ const db = require('../database/models');
 const { Op } = require("sequelize");
 
 /* GET home page. */
-router.get('/', (req, res) => {
-    res.redirect('/users')
-})
-router.get('/index', function(req, res, next) {
+router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
 });
+//GET para pagina de error.
 router.get('/somethingWrong', (req, res) => {
     res.render('somethingWrong', { title: 'Algo salio mal!', error: undefined })
 })

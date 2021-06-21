@@ -344,7 +344,7 @@ module.exports = {
                     project: '',
                     status: 'Libre',
                     license: 0,
-                    espejado: '',
+                    espejado: req.body.espejado,
                     clientSide: '',
                     editedByUser: res.locals.user,
 
