@@ -5,7 +5,7 @@ const { Op } = require("sequelize");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Express' });
+    res.render('index', { title: 'Ingenería BBIP' });
 });
 //GET para pagina de error.
 router.get('/somethingWrong', (req, res) => {

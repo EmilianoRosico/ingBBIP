@@ -2,179 +2,180 @@
 
     <body>
         <%- include('./partials/header') %>
-            <div class="d-flex justify-content-between ps-3">
-                <h3>
-                    <%= device.name %>
-                </h3>
-                <div class="d-flex align-items-center">
-                    <% if (sw) {%>
-                        <a href="/devices/vlans/<%=device.id%>"><span class="btn btn-secondary ">VLANs</span></a>
-                        <%}%>
+            <section class="min-height">
+                <div class="d-flex justify-content-between ps-3">
+                    <h3>
+                        <%= device.name %>
+                    </h3>
+                    <div class="d-flex align-items-center">
+                        <% if (sw) {%>
+                            <a href="/devices/vlans/<%=device.id%>"><span class="btn btn-secondary ">VLANs</span></a>
+                            <%}%>
 
-                            <a href="/devices/addSlot?id=<%=device.id%>"><span class="btn btn-primary ">Agregar Slot</span></a>
-                </div>
-            </div>
-            <div class="d-flex border ps-3">
-                <div class="col-md-3">
-                    <div class="col-sm">
-                        <strong>Lo25:</strong>
-                        <%= device.ipMgmt %>
-                    </div>
-                    <div class="col-sm">
-                        <strong>Lo10:</strong>
-                        <%= device.ipIgp %>
-                    </div>
-                    <div class="col-sm">
-                        <strong>Nodo:</strong>
-                        <a href="/nodes/<%=device.nodes.id%>">
-                            <%= device.nodes.name %>
-                        </a>
-                    </div>
-                    <div class="col-sm">
-                        <strong>País:</strong>
-                        <%= device.nodes.country %>
+                                <a href="/devices/addSlot?id=<%=device.id%>"><span class="btn btn-primary ">Agregar Slot</span></a>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="col-sm">
-                        <strong>Vendor:</strong>
-                        <%= device.devicemodels.vendor %>
+                <div class="d-flex border ps-3">
+                    <div class="col-md-3">
+                        <div class="col-sm">
+                            <strong>Lo25:</strong>
+                            <%= device.ipMgmt %>
+                        </div>
+                        <div class="col-sm">
+                            <strong>Lo10:</strong>
+                            <%= device.ipIgp %>
+                        </div>
+                        <div class="col-sm">
+                            <strong>Nodo:</strong>
+                            <a href="/nodes/<%=device.nodes.id%>">
+                                <%= device.nodes.name %>
+                            </a>
+                        </div>
+                        <div class="col-sm">
+                            <strong>País:</strong>
+                            <%= device.nodes.country %>
+                        </div>
                     </div>
-                    <div class="col-sm">
-                        <strong>Modelo:</strong>
-                        <a href="/images/<%=device.devicemodels.model%>.jpg" onclick="MM_openBrWindow('/images/<%=device.devicemodels.model%>.jpg','DeviceImg','scrollbars=yes,width=650,height=500'); return false;">
-                            <%= device.devicemodels.model %>
-                        </a>
+                    <div class="col-md-3">
+                        <div class="col-sm">
+                            <strong>Vendor:</strong>
+                            <%= device.devicemodels.vendor %>
+                        </div>
+                        <div class="col-sm">
+                            <strong>Modelo:</strong>
+                            <a href="/images/<%=device.devicemodels.model%>.jpg" onclick="MM_openBrWindow('/images/<%=device.devicemodels.model%>.jpg','DeviceImg','scrollbars=yes,width=650,height=500'); return false;">
+                                <%= device.devicemodels.model %>
+                            </a>
+                        </div>
+                        <div class="col-sm">
+                            <strong>Estado:</strong>
+                            <%= device.status %>
+                        </div>
                     </div>
-                    <div class="col-sm">
-                        <strong>Estado:</strong>
-                        <%= device.status %>
+                    <div class="col-md-3">
+                        <div class="col-sm">
+                            <strong>Nave:</strong>
+                            <%= device.room %>
+                        </div>
+                        <div class="col-sm">
+                            <strong>Fila:</strong>
+                            <%= device.row %>
+                        </div>
+                        <div class="col-sm">
+                            <strong>Rack:</strong>
+                            <%= device.rack %>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="col-sm">
+                            <strong>BackOffice:</strong>
+                            <%= device.hierarchy %>
+                        </div>
+                        <div class="col-sm">
+                            <strong>Rol:</strong>
+                            <%= device.deviceroles.name %>
+                        </div>
+                        <div class="col-sm">
+                            <strong>Virtual:</strong>
+                            <%= device.virtual===0?"NO":"SI" %>
+                        </div>
+                        <div class="col-sm">
+                            <strong>Lic NSO:</strong>
+                            <%= device.nsoLicense===0?"NO":"SI" %>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="col-sm">
-                        <strong>Nave:</strong>
-                        <%= device.room %>
-                    </div>
-                    <div class="col-sm">
-                        <strong>Fila:</strong>
-                        <%= device.row %>
-                    </div>
-                    <div class="col-sm">
-                        <strong>Rack:</strong>
-                        <%= device.rack %>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="col-sm">
-                        <strong>BackOffice:</strong>
-                        <%= device.hierarchy %>
-                    </div>
-                    <div class="col-sm">
-                        <strong>Rol:</strong>
-                        <%= device.deviceroles.name %>
-                    </div>
-                    <div class="col-sm">
-                        <strong>Virtual:</strong>
-                        <%= device.virtual===0?"NO":"SI" %>
-                    </div>
-                    <div class="col-sm">
-                        <strong>Lic NSO:</strong>
-                        <%= device.nsoLicense===0?"NO":"SI" %>
-                    </div>
-                </div>
-            </div>
 
-            <div class="accordion accordion-flush" id="deviceSlots">
-                <% slots.forEach(element => { %>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-heading<%=element.slot%>">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%=element.slot%>" aria-expanded="false" aria-controls="flush-collapse<%=element.slot%>">
+                <div class="accordion accordion-flush" id="deviceSlots">
+                    <% slots.forEach(element => { %>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-heading<%=element.slot%>">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%=element.slot%>" aria-expanded="false" aria-controls="flush-collapse<%=element.slot%>">
                                 Slot #<%=element.slot%>
                             </button>
-                        </h2>
-                        <div id="flush-collapse<%=element.slot%>" class="accordion-collapse collapse" aria-labelledby="flush-heading<%=element.slot%>" data-bs-parent="#deviceSlots">
-                            <div class="accordion-body">
-                                <div class="container-fluid ">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr class="fw-bold">
-                                                <th>Fecha</th>
-                                                <th>Usuario</th>
-                                                <th>Proyecto/SOL</th>
-                                                <th>Placa/Modulo</th>
-                                                <th>Licencia</th>
-                                                <th>Slot</th>
-                                                <th>Sub</th>
-                                                <th>Port</th>
-                                                <th class="status">Estado <i class="fas fa-filter"></i></th>
-                                                <th>Espejado</th>
-                                                <th>ExtremoCliente</th>
-                                                <th>Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="font-small">
-                                            <% ports.forEach(ele => { %>
-                                                <% if (ele.slot ==element.slot) { %>
-                                                    <tr>
-                                                        <td>
-                                                            <%= ele.updatedAt %>
-                                                        </td>
-                                                        <td>
-                                                            <%= ele.editedByUser %>
-                                                        </td>
-                                                        <td>
-                                                            <%= ele.project %>
-                                                        </td>
-                                                        <td>
-                                                            <%= ele.boardModule %>
-                                                        </td>
-                                                        <td>
-                                                            <%= ele.license == 1 ? 'SI':'NO' %>
-                                                        </td>
-                                                        <td>
-                                                            <%= ele.slot %>
-                                                        </td>
-                                                        <td>
-                                                            <%= ele.subSlot %>
-                                                        </td>
-                                                        <td>
-                                                            <%= ele.port %>
-                                                        </td>
-                                                        <td>
-                                                            <%= ele.status %>
-                                                        </td>
-                                                        <td>
-                                                            <%= ele.espejado %>
-                                                        </td>
-                                                        <td>
-                                                            <%= ele.clientSide %>
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex justify-content-around">
-                                                                <form class="deleteForm" action="/devices/edit/port/releasePort" method="POST">
-                                                                    <button>
+                            </h2>
+                            <div id="flush-collapse<%=element.slot%>" class="accordion-collapse collapse" aria-labelledby="flush-heading<%=element.slot%>" data-bs-parent="#deviceSlots">
+                                <div class="accordion-body">
+                                    <div class="container-fluid ">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr class="fw-bold">
+                                                    <th>Fecha</th>
+                                                    <th>Usuario</th>
+                                                    <th>Proyecto/SOL</th>
+                                                    <th>Placa/Modulo</th>
+                                                    <th>Licencia</th>
+                                                    <th>Slot</th>
+                                                    <th>Sub</th>
+                                                    <th>Port</th>
+                                                    <th class="status">Estado <i class="fas fa-filter"></i></th>
+                                                    <th>Espejado</th>
+                                                    <th>ExtremoCliente</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="font-small">
+                                                <% ports.forEach(ele => { %>
+                                                    <% if (ele.slot ==element.slot) { %>
+                                                        <tr>
+                                                            <td>
+                                                                <%= ele.updatedAt %>
+                                                            </td>
+                                                            <td>
+                                                                <%= ele.editedByUser %>
+                                                            </td>
+                                                            <td>
+                                                                <%= ele.project %>
+                                                            </td>
+                                                            <td>
+                                                                <%= ele.boardModule %>
+                                                            </td>
+                                                            <td>
+                                                                <%= ele.license == 1 ? 'SI':'NO' %>
+                                                            </td>
+                                                            <td>
+                                                                <%= ele.slot %>
+                                                            </td>
+                                                            <td>
+                                                                <%= ele.subSlot %>
+                                                            </td>
+                                                            <td>
+                                                                <%= ele.port %>
+                                                            </td>
+                                                            <td>
+                                                                <%= ele.status %>
+                                                            </td>
+                                                            <td>
+                                                                <%= ele.espejado %>
+                                                            </td>
+                                                            <td>
+                                                                <%= ele.clientSide %>
+                                                            </td>
+                                                            <td>
+                                                                <div class="d-flex justify-content-around">
+                                                                    <form class="deleteForm" action="/devices/edit/port/releasePort" method="POST">
+                                                                        <button>
                                                         <a href="/devices/edit/port/<%= ele.id %>" onclick="MM_openBrWindow('/devices/edit/port/<%= ele.id %>','Editar Puerto','scrollbars=yes,width=650,height=500'); return false;">
                                                         <i class="fas fa-edit btn btn-primary"></i>
                                                         </a>
                                                         </button>
-                                                                    <input type="text" hidden value="<%=ele.id %>" name="id">
-                                                                    <button type="submit" class=""><i class="fas fa-trash-alt btn btn-danger"></i></button>
-                                                                </form>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <% } %>
-                                                        <% }) %>
-                                        </tbody>
-                                    </table>
+                                                                        <input type="text" hidden value="<%=ele.id %>" name="id">
+                                                                        <button type="submit" class=""><i class="fas fa-trash-alt btn btn-danger"></i></button>
+                                                                    </form>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <% } %>
+                                                            <% }) %>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <% }) %>
-            </div>
-
+                        <% }) %>
+                </div>
+            </section>
             <script type="text/javascript">
                 function MM_openBrWindow(theURL, winName, features) { //v2.0
                     window.open(theURL, winName, features);
