@@ -4,9 +4,9 @@ var request = require('request');
 
 module.exports = {
     nodes: async(req, res) => {
-        let totalPages = Math.ceil(await db.nodes.count() / 10);
-        let page = Number(req.params.pag == undefined || req.params.pag < 1 || req.params.pag > totalPages ? 1 : req.params.pag)
         try {
+            let totalPages = Math.ceil(await db.nodes.count() / 10);
+            let page = Number(req.params.pag == undefined || req.params.pag < 1 || req.params.pag > totalPages ? 1 : req.params.pag)
             const nodes = await db.nodes.findAll({
                 limit: 10,
                 offset: (10 * (page - 1)),
@@ -16,7 +16,12 @@ module.exports = {
             })
             res.render('../views/nodes', { title: 'Nodos BBIP', nodes: nodes, page: page, totalPages: totalPages });
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            if (error.original.errno == "ECONNREFUSED") {
+                res.render('somethingWrong', { title: 'Algo salio mal!', error: "No se puede conectar la base de datos." })
+            } else {
+                res.render('somethingWrong', { title: 'Algo salio mal!', error: error })
+            }
         }
     },
     addNode: (req, res) => {

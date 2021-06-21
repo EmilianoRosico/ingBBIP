@@ -10,6 +10,9 @@ router.get('/', (req, res) => {
 router.get('/index', function(req, res, next) {
     res.render('index', { title: 'Express' });
 });
+router.get('/somethingWrong', (req, res) => {
+    res.render('somethingWrong', { title: 'Algo salio mal!', error: undefined })
+})
 
 //BUSCADOR
 router.get('/search', async(req, res) => {

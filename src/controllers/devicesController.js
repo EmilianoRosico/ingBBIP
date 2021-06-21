@@ -1,16 +1,15 @@
 const db = require('../database/models');
 const { Op } = require("sequelize");
 const fs = require('fs');
-const { log } = require('console');
 
 module.exports = {
     devices: async(req, res) => {
-        //Manejo del filtro por status
-        let status = req.query.status == undefined ? 'En Servicio' : req.query.status;
-        let totalPages = Math.ceil(await db.devices.count() / 10);
-        //Manejo del paginado
-        let page = Number(req.params.pag == undefined || req.params.pag < 1 || req.params.pag > totalPages ? 1 : req.params.pag)
         try {
+            //Manejo del filtro por status
+            let status = req.query.status == undefined ? 'En Servicio' : req.query.status;
+            let totalPages = Math.ceil(await db.devices.count() / 10);
+            //Manejo del paginado
+            let page = Number(req.params.pag == undefined || req.params.pag < 1 || req.params.pag > totalPages ? 1 : req.params.pag)
             const devices = await db.devices.findAll({
                 limit: 10,
                 offset: (10 * (page - 1)),
@@ -23,11 +22,15 @@ module.exports = {
                 ],
                 where: { status: status }
             })
-            res.render('../views/devices', { title: 'Equipamiento BBIP', devices: devices, page: page, totalPages: totalPages });
-        } catch {
-            (error => console.log(error))
+            res.render('devices', { title: 'Equipamiento BBIP', devices: devices, page: page, totalPages: totalPages });
+        } catch (error) {
+            console.log(error);
+            if (error.original.errno == "ECONNREFUSED") {
+                res.render('somethingWrong', { title: 'Algo salio mal!', error: "No se puede conectar la base de datos." })
+            } else {
+                res.render('somethingWrong', { title: 'Algo salio mal!', error: error })
+            }
         }
-
     },
     add: async(req, res) => {
         try {
@@ -39,9 +42,14 @@ module.exports = {
             const version = await db.versions.findAll();
             const model = await db.devicemodels.findAll();
             const role = await db.deviceroles.findAll();
-            res.render('../views/addDevice', { title: 'Agregar Equipamiento', nodes: nodes, version: version, model: model, role: role });
-        } catch {
-            (error => console.log(error))
+            res.render('addDevice', { title: 'Agregar Equipamiento', nodes: nodes, version: version, model: model, role: role });
+        } catch (error) {
+            console.log(error);
+            if (error.original.errno == "ECONNREFUSED") {
+                res.render('somethingWrong', { title: 'Algo salio mal!', error: "No se puede conectar la base de datos." })
+            } else {
+                res.render('somethingWrong', { title: 'Algo salio mal!', error: error })
+            }
         }
     },
     addPost: async(req, res) => {
@@ -98,7 +106,7 @@ module.exports = {
                 const version = await db.versions.findAll();
                 const model = await db.devicemodels.findAll();
                 const role = await db.deviceroles.findAll();
-                res.render('../views/editDevice', { title: 'Editar ' + device.name, device: device, nodes: nodes, version: version, model: model, role: role });
+                res.render('editDevice', { title: 'Editar ' + device.name, device: device, nodes: nodes, version: version, model: model, role: role });
             } else {
                 console.log('***************************************');
                 console.log('Se intenta editar un ID que no existe!');
@@ -205,19 +213,19 @@ module.exports = {
             if (device.name.slice(5, 9) == '-SW-' || device.name.slice(6, 10) == '-SW-') {
                 sw = true
             }
-            res.render('../views/deviceDetail', { title: 'Detalle Equipamiento', device: device, ports: ports, slots: slots, sw: sw });
+            res.render('deviceDetail', { title: 'Detalle Equipamiento', device: device, ports: ports, slots: slots, sw: sw });
         } catch {
             (error => console.log(error))
         }
     },
     addSlotGet: (req, res) => {
-        res.render('../views/addSlot', { title: 'Agregar Slot', id: req.query.id, subSlot: 0 });
+        res.render('addSlot', { title: 'Agregar Slot', id: req.query.id, subSlot: 0 });
     },
     addSlotPost: async(req, res) => {
         if (req.body.subSlot <= 0 || req.body.slot < 0 || req.body.subSlot == undefined) {
             res.redirect('/devices/addSlot?id=' + req.query.id);
         } else {
-            res.render('../views/addSlot', { title: 'Agregar Slot', id: req.query.id, slot: req.body.slot, subSlot: req.body.subSlot });
+            res.render('addSlot', { title: 'Agregar Slot', id: req.query.id, slot: req.body.slot, subSlot: req.body.subSlot });
         }
     },
     addSubSlotPost: async(req, res) => {
@@ -279,7 +287,12 @@ module.exports = {
                 console.log("************************************************")
             }
         } catch (error) {
-
+            console.log(error);
+            if (error.original.errno == "ECONNREFUSED") {
+                res.render('somethingWrong', { title: 'Algo salio mal!', error: "No se puede conectar la base de datos." })
+            } else {
+                res.render('somethingWrong', { title: 'Algo salio mal!', error: error })
+            }
         }
     },
     editPort: async(req, res) => {
@@ -312,7 +325,7 @@ module.exports = {
                 }, {
                     where: { id: req.params.id }
                 })
-                res.render('../views/editDevicePortConfirm', { title: "Se salvo cambio" })
+                res.render('editDevicePortConfirm', { title: "Se salvo cambio" })
             } else {
                 res.redirect('../views/error')
                 console.log("************************************************")
@@ -365,13 +378,13 @@ module.exports = {
                     ['vlan', 'ASC']
                 ]
             })
-            res.render('../views/deviceDetailVlans', { title: 'Detalle Equipamiento', device: device, vlans: vlans });
+            res.render('deviceDetailVlans', { title: 'Detalle Equipamiento', device: device, vlans: vlans });
         } catch (error) {
             console.log(vlans);
         }
     },
     addVlanGet: (req, res) => {
-        res.render('../views/addVlan', { title: 'Agregar Vlan', id: req.query.id });
+        res.render('addVlan', { title: 'Agregar Vlan', id: req.query.id });
     },
     addVlanPost: async(req, res) => {
         try {

@@ -2,9 +2,9 @@ const db = require('../database/models');
 
 module.exports = {
     versions: async(req, res) => {
-        let totalPages = Math.ceil(await db.versions.count() / 10);
-        let page = Number(req.params.pag == undefined || req.params.pag < 1 || req.params.pag > totalPages ? 1 : req.params.pag)
         try {
+            let totalPages = Math.ceil(await db.versions.count() / 10);
+            let page = Number(req.params.pag == undefined || req.params.pag < 1 || req.params.pag > totalPages ? 1 : req.params.pag)
             const versions = await db.versions.findAll({
                 limit: 10,
                 offset: (10 * (page - 1)),
@@ -16,16 +16,21 @@ module.exports = {
                     { association: "versiondevicemodels" }
                 ]
             })
-            res.render('../views/versions', { title: 'Versiones BBIP', versions: versions, page: page, totalPages: totalPages });
+            res.render('versions', { title: 'Versiones BBIP', versions: versions, page: page, totalPages: totalPages });
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            if (error.original.errno == "ECONNREFUSED") {
+                res.render('somethingWrong', { title: 'Algo salio mal!', error: "No se puede conectar la base de datos." })
+            } else {
+                res.render('somethingWrong', { title: 'Algo salio mal!', error: error })
+            }
         }
     },
     addVersion: async(req, res) => {
         try {
             const model = await db.devicemodels.findAll();
             const role = await db.deviceroles.findAll();
-            res.render('../views/addVersion', { title: 'Agregar Nodo', model: model, role: role });
+            res.render('addVersion', { title: 'Agregar Nodo', model: model, role: role });
         } catch (error) {
             console.log(error);
         }
