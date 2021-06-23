@@ -387,29 +387,33 @@ module.exports = {
         res.render('addVlan', { title: 'Agregar Vlan', id: req.query.id });
     },
     addVlanPost: async(req, res) => {
-        try {
-            const checkVlanExist = await db.vlans.findAll({
-                where: {
-                    deviceVlanId: req.body.deviceId,
-                    vlan: req.body.vlan
-                }
-            })
-            if (checkVlanExist.length == 0) {
-                const vlan = await db.vlans.create({
-                    deviceVlanId: req.body.deviceId,
-                    name: req.body.name,
-                    vlan: req.body.vlan,
-                    editedByUser: res.locals.user,
+        if (req.body.vlan >= 1 && req.body.vlan <= 4094) {
+            try {
+                const checkVlanExist = await db.vlans.findAll({
+                    where: {
+                        deviceVlanId: req.body.deviceId,
+                        vlan: req.body.vlan
+                    }
                 })
-                res.redirect('/devices/vlans/' + req.body.deviceId)
-            } else {
-                res.redirect('/devices/detail/' + req.body.deviceId)
-                console.log("************************************************")
-                console.log("La VLAN " + req.body.vlan + " ya existe!")
-                console.log("************************************************")
+                if (checkVlanExist.length == 0) {
+                    const vlan = await db.vlans.create({
+                        deviceVlanId: req.body.deviceId,
+                        name: req.body.name,
+                        vlan: req.body.vlan,
+                        editedByUser: res.locals.user,
+                    })
+                    res.redirect('/devices/vlans/' + req.body.deviceId)
+                } else {
+                    res.redirect('/devices/detail/' + req.body.deviceId)
+                    console.log("************************************************")
+                    console.log("La VLAN " + req.body.vlan + " ya existe!")
+                    console.log("************************************************")
+                }
+            } catch (error) {
+                console.log(error);
             }
-        } catch (error) {
-            console.log(error);
+        } else {
+            res.render('somethingWrong', { title: "Algo salio mal", error: "El rango de vlan debe ser entre 1 y 4094" })
         }
     },
     devicesFetch: async(req, res) => {

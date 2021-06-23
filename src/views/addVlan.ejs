@@ -8,7 +8,7 @@
                 </h1>
             </div>
             <div class="container min-height">
-                <form class="g-3 needs-validation nodes" action="/devices/addVlan" method="POST" novalidate>
+                <form class="g-3 needs-validation nodes vlan" action="/devices/addVlan" method="POST" novalidate>
                     <!--Se agregan estos campos escondidos por que el value con disable no viaja en el req.body-->
                     <input type="text" name="deviceId" hidden value="<%=id%>">
                     <div class="row">
@@ -33,5 +33,5 @@
                 </form>
             </div>
             <script async src="/javascripts/validationForm.js"></script>
-            <!--<script async src="/javascripts/swalNodes.js"></script>-->
+            <script async src="/javascripts/swalDevicesVlanAdd.js"></script>
             <%- include('./partials/footer') %>
