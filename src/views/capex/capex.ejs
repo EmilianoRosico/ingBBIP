@@ -1,7 +1,7 @@
-<%- include('./partials/head') %>
+<%- include('../partials/head') %>
 
     <body>
-        <%- include('./partials/header') %>
+        <%- include('../partials/header') %>
             <div class="d-flex justify-content-between ps-3">
                 <h1>
                     <%= title %>
@@ -27,9 +27,9 @@
                         <% solicitud.forEach(element=> { %>
                             <tr>
                                 <td>
-                                    <a href="/capex/<%= element.id%>">
-                                        <%= element.id %>
-                                            </a>
+                                    <a href="/capex/<%= element.id %>">
+                                        <%= element.id %>
+                                    </a>
                                 </td>
                                 <td>
                                     <%= element.createdAt %>
@@ -57,4 +57,4 @@
 
             <script src="/javascripts/swalDevices.js"></script>
 
-            <%- include('./partials/footer') %>
+            <%- include('../partials/footer') %>

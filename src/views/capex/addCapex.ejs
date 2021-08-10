@@ -1,7 +1,7 @@
-<%- include('./partials/head') %>
+<%- include('../partials/head') %>
 
     <body>
-        <%- include('./partials/header') %>
+        <%- include('../partials/header') %>
             <div class="d-flex justify-content-between">
                 <h1>
                     <%= title %>
@@ -90,7 +90,7 @@
                         </div>
                     </div>
                     <span class="ayuda">¿Te ayudo con el tipo de conexión?</span>
-                    <div id='img' class="hidden" >
+                    <div id='img' class="hidden">
                         <img src="/images/Single_Dual_Home.png">
                     </div>
                     <hr>
@@ -115,6 +115,7 @@
                             <option value="1Gb">1Gb</option>
                             <option value="10Gb">10Gb</option>
                             <option value="100Gb">100Gb</option>
+                            <option value="N/A">N/A</option>
                             </select>
                         <div class="invalid-feedback">
                             Por favor indique la capacidad de los puertos ópticos.
@@ -134,4 +135,4 @@
                     document.querySelector("#img").classList.toggle("show")
                 };
             </script>
-            <%- include('./partials/footer') %>
+            <%- include('../partials/footer') %>
