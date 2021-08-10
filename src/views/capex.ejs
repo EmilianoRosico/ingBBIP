@@ -1,0 +1,58 @@
+<%- include('./partials/head') %>
+
+    <body>
+        <%- include('./partials/header') %>
+            <div class="d-flex justify-content-between ps-3">
+                <h1>
+                    <%= title %>
+                </h1>
+                <div class="d-flex align-items-center">
+                    <a href="/capex/addCapex"><span class="btn btn-primary ">Nueva Solicitud CAPEX</span></a>
+                </div>
+            </div>
+            <div class="container min-height">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="fw-bold">
+                            <th>ID</th>
+                            <th>Fecha pedido</th>
+                            <th>Título proyecto</th>
+                            <th>CellID</th>
+                            <th>Puertos eléctricos</th>
+                            <th>Puertos ópticos</th>
+                            <th>Fecha objetivo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% solicitud.forEach(element=> { %>
+                            <tr>
+                                <td>
+                                    <%= element.id %>
+                                </td>
+                                <td>
+                                    <%= element.createdAt %>
+                                </td>
+                                <td>
+                                    <%= element.tituloProyecto %>
+                                </td>
+                                <td>
+                                    <%= element.cellId %>
+                                </td>
+                                <td>
+                                    <%= element.puertosElectricos %>
+                                </td>
+                                <td>
+                                    <%= element.puertosOpticos %>
+                                </td>
+                                <td>
+                                    <%= element.fechaObjetivo %>
+                                </td>
+                            </tr>
+                            <%});%>
+                    </tbody>
+                </table>
+            </div>
+
+            <script src="/javascripts/swalDevices.js"></script>
+            
+            <%- include('./partials/footer') %>

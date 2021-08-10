@@ -10,6 +10,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var devicesRouter = require('./routes/devices')
 var nodesRouter = require('./routes/nodes')
+var capexRouter = require('./routes/capex')
 var nsoRouter = require('./routes/nso')
 var versionsRouter = require('./routes/versions')
 var redirectLogin = require('./middlewares/redirectLogin');
@@ -37,6 +38,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use('/', indexRouter);
 app.use('/devices', redirectLogin, devicesRouter)
 app.use('/nodes', redirectLogin, nodesRouter)
+app.use('/capex', redirectLogin, capexRouter);
 app.use('/users', usersRouter);
 app.use('/nso', redirectLogin, nsoRouter);
 app.use('/versions', redirectLogin, versionsRouter);

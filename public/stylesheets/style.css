@@ -122,3 +122,14 @@ button {
 .min-height {
     min-height: 500px;
 }
+.ayuda{
+    font-size: 12px;
+    color:darkblue;
+    cursor: pointer;
+}
+.hidden {
+    display: none;
+}
+.show {
+    display: block;
+}
