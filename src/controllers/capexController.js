@@ -1,6 +1,5 @@
 const db = require('../database/models');
-const { Op } = require("sequelize");
-var request = require('request');
+
 
 module.exports = {
     view: async (req, res) => {
@@ -12,7 +11,7 @@ module.exports = {
     },
     postCapex: async(req, res) => {
         try {
-                const solicitud = await db.capexs.create({
+                await db.capexs.create({
                     solicitante: res.locals.user,
                     tituloProyecto: req.body.tituloProyecto,
                     areaSolicitante: req.body.areaSolicitante,

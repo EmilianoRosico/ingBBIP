@@ -27,7 +27,9 @@
                         <% solicitud.forEach(element=> { %>
                             <tr>
                                 <td>
-                                    <%= element.id %>
+                                    <a href="/capex/<%= element.id%>">
+                                        <%= element.id %>
+                                            </a>
                                 </td>
                                 <td>
                                     <%= element.createdAt %>
@@ -54,5 +56,5 @@
             </div>
 
             <script src="/javascripts/swalDevices.js"></script>
-            
+
             <%- include('./partials/footer') %>
