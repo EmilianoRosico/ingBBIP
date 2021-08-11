@@ -1,0 +1,159 @@
+<%- include('../partials/head') %>
+
+    <body>
+        <div class="d-flex">
+            <%- include('../partials/sidebar') %>
+                <div class="container p-0">
+                    <%- include('../partials/header') %>
+                        <div class="container-fluid">
+
+                            <!-- Page Heading -->
+                            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                <h1 class="h3 mb-0 text-gray-800">Capex Dashboard</h1>
+                            </div>
+
+                            <!-- Content Row -->
+                            <div class="row">
+                                <div class="col-md-4 mb-4">
+                                    <div class="card border-left-primary shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> Cantidad de solicitudes</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                        <%= solicitud.length %>
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="card border-left-success shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1"> Amount in products</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">$546.456</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="card border-left-warning shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Users quantity
+                                                    </div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">38</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-user-check fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Content Row -->
+                            <div class="row">
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">Solicitudes por Nodo</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <% nodos.forEach(element => { %>
+                                                    <div class="col-lg-6 mb-4">
+                                                        <div class="card bg-info text-white shadow">
+                                                            <div class="card-body d-flex justify-content-between">
+                                                                <span><%= element.cellId %></span>
+                                                                <span><%= element.dataValues.result %></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <% }) %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">Solicitudes por área</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <% areas.forEach(element => { %>
+                                                    <div class="col-lg-6 mb-4">
+                                                        <div class="card bg-info text-white shadow">
+                                                            <div class="card-body d-flex justify-content-between">
+                                                                <span><%= element.areaSolicitante %></span>
+                                                                <span><%= element.dataValues.result %></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <% }) %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container min-height">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr class="fw-bold">
+                                            <th>ID</th>
+                                            <th>Fecha pedido</th>
+                                            <th>Título proyecto</th>
+                                            <th>CellID</th>
+                                            <th>Puertos eléctricos</th>
+                                            <th>Puertos ópticos</th>
+                                            <th>Fecha objetivo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% solicitud.forEach(element=> { %>
+                                            <tr>
+                                                <td>
+                                                    <a href="/capex/<%= element.id %>">
+                                                        <%= element.id %>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <%= element.createdAt %>
+                                                </td>
+                                                <td>
+                                                    <%= element.tituloProyecto %>
+                                                </td>
+                                                <td>
+                                                    <%= element.cellId %>
+                                                </td>
+                                                <td>
+                                                    <%= element.puertosElectricos %>
+                                                </td>
+                                                <td>
+                                                    <%= element.puertosOpticos %>
+                                                </td>
+                                                <td>
+                                                    <%= element.fechaObjetivo %>
+                                                </td>
+                                            </tr>
+                                            <%});%>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <%- include('../partials/footer') %>
+                        </div>
+                </div>

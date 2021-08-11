@@ -11,6 +11,7 @@ var usersRouter = require('./routes/users');
 var devicesRouter = require('./routes/devices')
 var nodesRouter = require('./routes/nodes')
 var capexRouter = require('./routes/capex')
+var dashboardRouter = require('./routes/dashboard')
 var nsoRouter = require('./routes/nso')
 var versionsRouter = require('./routes/versions')
 var redirectLogin = require('./middlewares/redirectLogin');
@@ -42,6 +43,7 @@ app.use('/capex', redirectLogin, capexRouter);
 app.use('/users', usersRouter);
 app.use('/nso', redirectLogin, nsoRouter);
 app.use('/versions', redirectLogin, versionsRouter);
+app.use('/dashboard', dashboardRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

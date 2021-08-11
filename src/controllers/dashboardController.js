@@ -1,10 +1,29 @@
 const db = require('../database/models');
+const sequelize = require('sequelize')
 
 
 module.exports = {
-    view: async(req, res) => {
-        const solicitud = await db.capexs.findAll({ where: { solicitante: res.locals.user } });
-        res.render('../views/capex/capex', { title: 'Solicitud CAPEX', solicitud: solicitud });
+    dashboard: (req, res) => {
+        res.render('../views/dashboards/dashboard', { title: 'Dashboard' });
+    },
+    dashboardCapex: async(req, res) => {
+        const solicitud = await db.capexs.findAll();
+        const nodos = await db.capexs.findAll({
+            attributes: ['cellId', [sequelize.fn('COUNT', sequelize.col('cellId')), 'result']],
+            group: 'cellId',
+            order: [
+                ['cellId', 'ASC']
+            ]
+        })
+        const areas = await db.capexs.findAll({
+            attributes: ['areaSolicitante', [sequelize.fn('COUNT', sequelize.col('areaSolicitante')), 'result']],
+            group: 'areaSolicitante',
+            order: [
+                ['areaSolicitante', 'ASC']
+            ]
+        })
+
+        res.render('../views/dashboards/dashboardCapex', { title: 'Dashboard', solicitud: solicitud, nodos: nodos, areas: areas });
     },
     detail: async(req, res) => {
         const solicitud = await db.capexs.findByPk(req.params.id, { where: { solicitante: res.locals.user } })
@@ -14,9 +33,6 @@ module.exports = {
             res.render('somethingWrong', { title: 'SomethingWrong', error: 'Solicitud no generada por su usuario.' })
         }
 
-    },
-    addCapex: (req, res) => {
-        res.render('../views/capex/addCapex', { title: 'Nueva solicitud CAPEX' });
     },
     postCapex: async(req, res) => {
         try {
@@ -34,10 +50,11 @@ module.exports = {
                 capacidadPuerto: req.body.capacidadPuerto,
                 comentarios: req.body.comentarios,
             })
-            res.redirect('/capex');
+            res.redirect('/capex/capex');
 
         } catch {
             (error => console.log(error))
         }
-    },
+
+    }
 }
