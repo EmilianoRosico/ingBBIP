@@ -22,8 +22,16 @@ module.exports = {
                 ['areaSolicitante', 'ASC']
             ]
         })
-
-        res.render('../views/dashboards/dashboardCapex', { title: 'Dashboard', solicitud: solicitud, nodos: nodos, areas: areas });
+        const puertosElectricos = await db.capexs.sum('puertosElectricos')
+        const puertosOpticos = await db.capexs.sum('puertosOpticos')
+        res.render('../views/dashboards/dashboardCapex', {
+            title: 'Dashboard',
+            solicitud: solicitud,
+            nodos: nodos,
+            areas: areas,
+            puertosElectricos: puertosElectricos,
+            puertosOpticos: puertosOpticos
+        });
     },
     detail: async(req, res) => {
         const solicitud = await db.capexs.findByPk(req.params.id, { where: { solicitante: res.locals.user } })
