@@ -11,6 +11,7 @@ var usersRouter = require('./routes/users');
 var devicesRouter = require('./routes/devices')
 var nodesRouter = require('./routes/nodes')
 var capexRouter = require('./routes/capex')
+var apiRouter = require('./routes/api')
 var dashboardRouter = require('./routes/dashboard')
 var nsoRouter = require('./routes/nso')
 var versionsRouter = require('./routes/versions')
@@ -40,6 +41,7 @@ app.use('/', indexRouter);
 app.use('/devices', redirectLogin, devicesRouter)
 app.use('/nodes', redirectLogin, nodesRouter)
 app.use('/capex', redirectLogin, capexRouter);
+app.use('/api', redirectLogin, apiRouter);
 app.use('/users', usersRouter);
 app.use('/nso', redirectLogin, nsoRouter);
 app.use('/versions', redirectLogin, versionsRouter);
