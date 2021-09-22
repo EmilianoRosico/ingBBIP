@@ -7,7 +7,7 @@ module.exports = {
         res.render('../views/capex/capex', { title: 'Solicitud CAPEX', solicitud: solicitud });
     },
     detail: async (req, res) => {
-        const solicitud = await db.capexs.findByPk(req.params.id, { where: { solicitante: res.locals.user } })
+        const solicitud = await db.capexs.findByPk(req.params.id)
         if (solicitud != null) {
             res.render('../views/capex/capexDetail', { title: `Solicitud ${req.params.id}`, solicitud: solicitud });
         } else {
@@ -42,7 +42,7 @@ module.exports = {
     },
     editGet: async (req, res) => {
         try {
-            const solicitud = await db.capexs.findByPk(req.params.id, { where: { solicitante: res.locals.user } })
+            const solicitud = await db.capexs.findOne({ where: {id:req.params.id, solicitante: res.locals.user } })
             if (solicitud != null) {
                 res.render('../views/capex/editCapex', { title: `Solicitud ${req.params.id}`, solicitud: solicitud });
             } else {
@@ -54,7 +54,7 @@ module.exports = {
     },
     editPost: async (req, res) => {
         try {
-            const solicitud = await db.capexs.findByPk(req.params.id)
+            const solicitud = await db.capexs.findOne({ where: {id:req.params.id, solicitante: res.locals.user } })
             if (solicitud != null) {
                 await db.capexs.update({
                     solicitante: res.locals.user,
@@ -74,7 +74,7 @@ module.exports = {
                 })
                 res.redirect('/capex');
             } else {
-                res.render('somethingWrong', { title: 'SomethingWrong', error: 'La solicitud que desea editar NO existe!' })
+                res.render('somethingWrong', { title: 'SomethingWrong', error: 'La solicitud a editar NO fue cargada por usted!' })
                 console.log("************************************************")
                 console.log("La solicitud " + req.params.id + " NO existe!")
                 console.log("************************************************")
