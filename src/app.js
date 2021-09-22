@@ -45,7 +45,7 @@ app.use('/api', redirectLogin, apiRouter);
 app.use('/users', usersRouter);
 app.use('/nso', redirectLogin, nsoRouter);
 app.use('/versions', redirectLogin, versionsRouter);
-app.use('/dashboard', dashboardRouter)
+app.use('/dashboard',redirectLogin, dashboardRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
