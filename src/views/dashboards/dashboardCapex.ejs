@@ -9,6 +9,7 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
           <h1 class="h3 mb-0 text-gray-800">Capex Dashboard</h1>
+          <a href="/api/capexDatatoXLS"><i class="fas fa-file-excel btn btn-primary"></i></a>
         </div>
 
         <!-- Content Row -->
@@ -174,7 +175,7 @@
                 <td>
                   <a href="/capex/<%= element.id %>"> <%= element.id %> </a>
                 </td>
-                <td><%= element.createdAt %></td>
+                <td><%= element.updatedAt %></td>
                 <td><%= element.tituloProyecto %></td>
                 <td><%= element.cellId %></td>
                 <td><%= element.solicitante %></td>

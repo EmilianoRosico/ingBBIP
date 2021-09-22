@@ -3,6 +3,7 @@ const apiController = require('../controllers/apiController');
 var router = express.Router();
 
 router.get('/capexData', apiController.capexData);
+router.get('/capexDatatoXLS', apiController.capexDatatoXLS);
 
 
 
