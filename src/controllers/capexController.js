@@ -18,6 +18,9 @@ module.exports = {
     addCapex: (req, res) => {
         res.render('../views/capex/addCapex', { title: 'Nueva solicitud CAPEX' });
     },
+    addCapexBlock: (req, res) => {
+        res.render('somethingWrong', { title: 'SomethingWrong', error: 'Vencido el tiempo de solicitudes.' })
+    },
     postCapex: async (req, res) => {
         try {
             await db.capexs.create({
