@@ -1,138 +1,307 @@
 <%- include('../partials/head') %>
 
-    <body>
-        <%- include('../partials/header') %>
-            <div class="d-flex justify-content-between">
-                <h1>
-                    <%= title %>
-                </h1>
-            </div>
+<body>
+  <%- include('../partials/header') %>
+  <div class="d-flex justify-content-between">
+    <h1><%= title %></h1>
+  </div>
 
-            <div class="container-fluid min-height">
-                <form class="row g-3 needs-validation nodes" action="/capex/addCapex" method="POST" novalidate>
-                    <div class="col-md-3">
-                        <label for="tituloProyecto" class="form-label">Título proyecto</label>
-                        <input type="text" class="form-control" id="tituloProyecto" name="tituloProyecto" placeholder="DC TelcoCloud" required>
-                        <div class="invalid-feedback">
-                            Por favor ingresa el título del proyecto.
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="areaSolicitante" class="form-label">Área Solicitante</label>
-                        <select class="form-select" id="areaSolicitante" name="areaSolicitante" required>
-                            <option selected disabled value="">Elija...</option>
-                            <option value="Plat.CS/IMS Core">Plataformas CS/IMS Core - Edgardo Gross</option>
-                            <option value="Plat. VA y SDM">Plataformas VA y SDM - Laura Rodriguez</option>
-                            <option value="Ing. Microondas">Ingeniería Microondas - Jose Ignacio Celada</option>
-                            <option value="Plan. Infrea E&F">Planificación Infreaestructura E&F - Marcos Humphreys</option>
-                            <option value="Ing. Transmisión">Ingeniería Transmisión - Esteban Lazcano</option>
-                            <option value="Plat Packet Core">Plataformas Packet Core - Marcelo Lopez</option>
-                            <option value="Optimización">Optimización - Gonzalo Bacelli</option>
-                            <option value="Soporte Corp. Infra Red">Soporte Corp. Infraestruct. de Red - Gonzalo Juncos</option>
-                            <option value="Arquitectura de Red">Arquitectura de Red - Javier Navarro</option>
-                            <option value="Automatización_Estrategia">Automatización y Estrategia - German Perez Trozzi</option>
-                            <option value="Networking y Seg Logica">Networking y Seg Logica - Santiago Bruny</option>
-                            <option value="TV y Proyectos Especiales">TV y Proyectos Especiales - Claudio Duro</option>
-                            <option value="Ing. Agregación  IP">Ingenieria Agregación  IP - Martin Alvarez</option>
-                            <option value="Plan. técnica">Planificación técnica - Daniel Frega</option>
-                            <option value="Ing. de Proyectos">Ingeniería de Proyectos - Pablo Llorenz</option>
-                            <option value="Consultoría y Diseño">Consultoría y Diseño - Renzo Folini</option>
-                            <option value="Ing. Acceso Movil">Ingenieria Acceso Movil - Jorge Brunello</option>
-                            <option value="Seguridad Fisica">Seguridad Fisica y Electrónica - Cristian Juarez</option>
-                            </select>
-                        <div class="invalid-feedback">
-                            Por favor ingresa el área a cargo de la solicitud.
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="requerimiento" class="form-label">Tipo de Requerimiento</label>
-                        <select class="form-select" id="requerimiento" name="requerimiento" required>
-                            <option selected disabled value="">Elija...</option>
-                            <option value="Ampliación">Ampliación</option>
-                            <option value="Nueva plataforma">Nueva plataforma</option>
-                            <option value="Sin necesidad">Sin necesidad</option>
-                            </select>
-                        <div class="invalid-feedback">
-                            Por favor indique el tipo de necesidad.
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="cellId" class="form-label">Cell ID</label>
-                        <input type="text" class="form-control" id="cellId" name="cellId" placeholder="CO008" required>
-                        <div class="invalid-feedback">
-                            Por favor ingresa el cell id del nodo.
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="fechaObjetivo" class="form-label">Fecha Objetivo</label>
-                        <input type="date" class="form-control" id="fechaObjetivo" name="fechaObjetivo" required>
-                        <div class="invalid-feedback">
-                            Por favor ingresa la fecha objetivo de la necesidad.
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="col-md-2">
-                        <label for="redundancia" class="form-label">Tipo de conexión</label>
-                        <select class="form-select" id="redundancia" name="redundancia" required>
-                            <option selected disabled value="">Elija...</option>
-                            <option value="Single Homed">Single Homed</option>
-                            <option value="Dual Homed">Dual Homed</option>
-                            </select>
-                        <div class="invalid-feedback">
-                            Por favor indique el tipo de conexión al BBIP.
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="bandwidth" class="form-label">Ancho de banda total requerido</label>
-                        <input type="text" class="form-control" id="bandwidth" name="bandwidth" placeholder="18Gb" required>
-                        <div class="invalid-feedback">
-                            Por favor ingrese el BW estimado a ser consumido por la plataforma.
-                        </div>
-                    </div>
-                    <span class="ayuda">¿Te ayudo con el tipo de conexión?</span>
-                    <div id='img' class="hidden">
-                        <img src="/images/Single_Dual_Home.png">
-                    </div>
-                    <hr>
-                    <div class="col-md-2">
-                        <label for="puertosElectricos" class="form-label">Puertos eléctricos</label>
-                        <input type="number" class="form-control" id="puertosElectricos" name="puertosElectricos" placeholder="3" required>
-                        <div class="invalid-feedback">
-                            Por favor ingresa el total de puertos UTP.
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="puertosOpticos" class="form-label">Puertos ópticos</label>
-                        <input type="number" class="form-control" id="puertosOpticos" name="puertosOpticos" placeholder="5" required>
-                        <div class="invalid-feedback">
-                            Por favor ingresa el total de puertos ópticos.
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="capacidadPuerto" class="form-label">Capacidad puertos ópticos</label>
-                        <select class="form-select" id="capacidadPuerto" name="capacidadPuerto" required>
-                            <option selected disabled value="">Elija...</option>
-                            <option value="1Gb">1Gb</option>
-                            <option value="10Gb">10Gb</option>
-                            <option value="100Gb">100Gb</option>
-                            <option value="N/A">N/A</option>
-                            </select>
-                        <div class="invalid-feedback">
-                            Por favor indique la capacidad de los puertos ópticos.
-                        </div>
-                    </div>
-                    <p><strong>Comentarios:</strong> Indicar la cantidad total de puertos que debe conectar, si es seleccionado como tipo de conexión <em>"Dual Homed"</em> serán asignados la mitad de los puertos informados en cada uno de los PE.</p>
-                    <span>Por favor deje cualquier aclaración pertinente:</span>
-                    <textarea name="comentarios"></textarea>
-                    <div class="col-12">
-                        <button class="btn btn-primary" type="submit">Crear Requerimiento</button>
-                    </div>
-                </form>
-            </div>
-            <script async src="/javascripts/validationForm.js"></script>
-            <script type="text/javascript">
-                document.querySelector(".ayuda").onclick = function() {
-                    document.querySelector("#img").classList.toggle("show")
-                };
-            </script>
-            <%- include('../partials/footer') %>
+  <div class="container-fluid min-height">
+    <form
+      class="row g-3 needs-validation nodes"
+      action="/capex/addCapex"
+      method="POST"
+      novalidate
+    >
+      <div class="col-md-3">
+        <label for="tituloProyecto" class="form-label">Título proyecto</label>
+        <input
+          type="text"
+          class="form-control"
+          id="tituloProyecto"
+          name="tituloProyecto"
+          placeholder="DC TelcoCloud"
+          required
+        />
+        <div class="invalid-feedback">
+          Por favor ingresa el título del proyecto.
+        </div>
+      </div>
+      <div class="col-md-3">
+        <label for="areaSolicitante" class="form-label">Área Solicitante</label>
+        <select
+          class="form-select"
+          id="areaSolicitante"
+          name="areaSolicitante"
+          required
+        >
+          <option selected disabled value="">Elija...</option>
+          <option value="Plat.CS/IMS Core">
+            Plataformas CS/IMS Core - Edgardo Gross
+          </option>
+          <option value="Plat. VA y SDM">
+            Plataformas VA y SDM - Laura Rodriguez
+          </option>
+          <option value="Ing. Microondas">
+            Ingeniería Microondas - Jose Ignacio Celada
+          </option>
+          <option value="Plan. Infrea E&F">
+            Planificación Infreaestructura E&F - Marcos Humphreys
+          </option>
+          <option value="Ing. Transmisión">
+            Ingeniería Transmisión - Esteban Lazcano
+          </option>
+          <option value="Plat Packet Core">
+            Plataformas Packet Core - Marcelo Lopez
+          </option>
+          <option value="Optimización">Optimización - Gonzalo Bacelli</option>
+          <option value="Soporte Corp. Infra Red">
+            Soporte Corp. Infraestruct. de Red - Gonzalo Juncos
+          </option>
+          <option value="Arquitectura de Red">
+            Arquitectura de Red - Javier Navarro
+          </option>
+          <option value="Automatización_Estrategia">
+            Automatización y Estrategia - German Perez Trozzi
+          </option>
+          <option value="Networking y Seg Logica">
+            Networking y Seg Logica - Santiago Bruny
+          </option>
+          <option value="TV y Proyectos Especiales">
+            TV y Proyectos Especiales - Claudio Duro
+          </option>
+          <option value="Ing. Agregación  IP">
+            Ingenieria Agregación IP - Martin Alvarez
+          </option>
+          <option value="Plan. técnica">
+            Planificación técnica - Daniel Frega
+          </option>
+          <option value="Ing. de Proyectos">
+            Ingeniería de Proyectos - Pablo Llorenz
+          </option>
+          <option value="Consultoría y Diseño">
+            Consultoría y Diseño - Renzo Folini
+          </option>
+          <option value="Ing. Acceso Movil">
+            Ingenieria Acceso Movil - Jorge Brunello
+          </option>
+          <option value="Seguridad Fisica">
+            Seguridad Fisica y Electrónica - Cristian Juarez
+          </option>
+        </select>
+        <div class="invalid-feedback">
+          Por favor ingresa el área a cargo de la solicitud.
+        </div>
+      </div>
+      <div class="col-md-2">
+        <label for="requerimiento" class="form-label"
+          >Tipo de Requerimiento</label
+        >
+        <select
+          class="form-select"
+          id="requerimiento"
+          name="requerimiento"
+          required
+        >
+          <option selected disabled value="">Elija...</option>
+          <option value="Ampliación">Ampliación</option>
+          <option value="Nueva plataforma">Nueva plataforma</option>
+          <option value="Sin necesidad">Sin necesidad</option>
+        </select>
+        <div class="invalid-feedback">
+          Por favor indique el tipo de necesidad.
+        </div>
+      </div>
+      <div class="col-md-2">
+        <label for="cellId" class="form-label">Cell ID</label>
+        <select class="form-select" id="cellId" name="cellId" required>
+          <option selected disabled value="">Elija...</option>
+          <option value="AMB806-TC3068">AMB806-TC3068</option>
+          <option value="AP030">AP030</option>
+          <option value="AS019">AS019</option>
+          <option value="AS023">AS023</option>
+          <option value="BA024">BA024</option>
+          <option value="BA081">BA081</option>
+          <option value="BA095">BA095</option>
+          <option value="BA162">BA162</option>
+          <option value="BA172">BA172</option>
+          <option value="C1154">C1154</option>
+          <option value="C1900">C1900</option>
+          <option value="C2369">C2369</option>
+          <option value="C2767">C2767</option>
+          <option value="C2768">C2768</option>
+          <option value="C2770">C2770</option>
+          <option value="C3676">C3676</option>
+          <option value="C5218">C5218</option>
+          <option value="CA078">CA078</option>
+          <option value="CB201">CB201</option>
+          <option value="CB204">CB204</option>
+          <option value="CF129">CF129</option>
+          <option value="CF223">CF223</option>
+          <option value="CHR02">CHR02</option>
+          <option value="CO008">CO008</option>
+          <option value="CO065">CO065</option>
+          <option value="CO704">CO704</option>
+          <option value="CO905">CO905</option>
+          <option value="CR001">CR001</option>
+          <option value="CT200">CT200</option>
+          <option value="ER054">ER054</option>
+          <option value="JU001">JU001</option>
+          <option value="ME038">ME038</option>
+          <option value="ME099">ME099</option>
+          <option value="ME205">ME205</option>
+          <option value="MI001">MI001</option>
+          <option value="MO022">MO022</option>
+          <option value="MO0274">MO0274</option>
+          <option value="MO201">MO201</option>
+          <option value="NQ074">NQ074</option>
+          <option value="PA201">PA201</option>
+          <option value="RJ001">RJ001</option>
+          <option value="RN092">RN092</option>
+          <option value="SC205">SC205</option>
+          <option value="SF044">SF044</option>
+          <option value="SF903">SF903</option>
+          <option value="SFE903">SFE903</option>
+          <option value="ST201">ST201</option>
+          <option value="ST206">ST206</option>
+          <option value="TC2470">TC2470</option>
+          <option value="TC2471">TC2471</option>
+          <option value="TC2740">TC2740</option>
+          <option value="TC3397">TC3397</option>
+          <option value="TCF296">TCF296</option>
+          <option value="TCF296 ">TCF296</option>
+          <option value="TCO895">TCO895</option>
+          <option value="TF004">TF004</option>
+          <option value="TF007">TF007</option>
+          <option value="TME298">TME298</option>
+          <option value="TS1001">TS1001</option>
+          <option value="TU001">TU001</option>
+        </select>
+        <div class="invalid-feedback">
+          Por favor ingresa el cell id del nodo.
+        </div>
+      </div>
+      <div class="col-md-2">
+        <label for="fechaObjetivo" class="form-label">Fecha Objetivo</label>
+        <input
+          type="date"
+          class="form-control"
+          id="fechaObjetivo"
+          name="fechaObjetivo"
+          required
+        />
+        <div class="invalid-feedback">
+          Por favor ingresa la fecha objetivo de la necesidad.
+        </div>
+      </div>
+      <hr />
+      <div class="col-md-2">
+        <label for="redundancia" class="form-label">Tipo de conexión</label>
+        <select
+          class="form-select"
+          id="redundancia"
+          name="redundancia"
+          required
+        >
+          <option selected disabled value="">Elija...</option>
+          <option value="Single Homed">Single Homed</option>
+          <option value="Dual Homed">Dual Homed</option>
+        </select>
+        <div class="invalid-feedback">
+          Por favor indique el tipo de conexión al BBIP.
+        </div>
+      </div>
+      <div class="col-md-2">
+        <label for="bandwidth" class="form-label"
+          >Ancho de banda total requerido</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="bandwidth"
+          name="bandwidth"
+          placeholder="18Gb"
+          required
+        />
+        <div class="invalid-feedback">
+          Por favor ingrese el BW estimado a ser consumido por la plataforma.
+        </div>
+      </div>
+      <span class="ayuda">¿Te ayudo con el tipo de conexión?</span>
+      <div id="img" class="hidden">
+        <img src="/images/Single_Dual_Home.png" />
+      </div>
+      <hr />
+      <div class="col-md-2">
+        <label for="puertosElectricos" class="form-label"
+          >Puertos eléctricos</label
+        >
+        <input
+          type="number"
+          class="form-control"
+          id="puertosElectricos"
+          name="puertosElectricos"
+          placeholder="3"
+          required
+        />
+        <div class="invalid-feedback">
+          Por favor ingresa el total de puertos UTP.
+        </div>
+      </div>
+      <div class="col-md-2">
+        <label for="puertosOpticos" class="form-label">Puertos ópticos</label>
+        <input
+          type="number"
+          class="form-control"
+          id="puertosOpticos"
+          name="puertosOpticos"
+          placeholder="5"
+          required
+        />
+        <div class="invalid-feedback">
+          Por favor ingresa el total de puertos ópticos.
+        </div>
+      </div>
+      <div class="col-md-2">
+        <label for="capacidadPuerto" class="form-label"
+          >Capacidad puertos ópticos</label
+        >
+        <select
+          class="form-select"
+          id="capacidadPuerto"
+          name="capacidadPuerto"
+          required
+        >
+          <option selected disabled value="">Elija...</option>
+          <option value="1Gb">1Gb</option>
+          <option value="10Gb">10Gb</option>
+          <option value="100Gb">100Gb</option>
+          <option value="N/A">N/A</option>
+        </select>
+        <div class="invalid-feedback">
+          Por favor indique la capacidad de los puertos ópticos.
+        </div>
+      </div>
+      <p>
+        <strong>Comentarios:</strong> Indicar la cantidad total de puertos que
+        debe conectar, si es seleccionado como tipo de conexión
+        <em>"Dual Homed"</em> serán asignados la mitad de los puertos informados
+        en cada uno de los PE.
+      </p>
+      <span>Por favor deje cualquier aclaración pertinente:</span>
+      <textarea name="comentarios"></textarea>
+      <div class="col-12">
+        <button class="btn btn-primary" type="submit">
+          Crear Requerimiento
+        </button>
+      </div>
+    </form>
+  </div>
+  <script async src="/javascripts/validationForm.js"></script>
+  <script type="text/javascript">
+    document.querySelector(".ayuda").onclick = function () {
+      document.querySelector("#img").classList.toggle("show");
+    };
+  </script>
+  <%- include('../partials/footer') %>
+</body>

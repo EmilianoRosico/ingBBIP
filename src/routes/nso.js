@@ -6,6 +6,7 @@ router.get('/devices', nsoController.devices);
 router.get('/services', nsoController.services);
 router.get('/test', nsoController.showTest);
 router.post('/test', nsoController.test);
+router.get('/segmentrouting', nsoController.segmentRouting);
 
 
 

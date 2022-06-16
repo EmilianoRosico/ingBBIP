@@ -2,7 +2,7 @@ const db = require('../database/models');
 const request = require('request');
 
 module.exports = {
-    devices: async(req, res) => {
+    devices: async (req, res) => {
         try {
             const nodes = await db.nodes.findAll()
             res.render('../views/nodes', { title: 'Nodos BBIP', nodes: nodes });
@@ -12,7 +12,7 @@ module.exports = {
 
 
     },
-    services: async(req, res) => {
+    services: async (req, res) => {
         try {
             const nodes = await db.devices.findAll({
                 attributes: ['name']
@@ -27,7 +27,7 @@ module.exports = {
                 }
             };
             var devices = {}
-            request(options, function(error, response) {
+            request(options, function (error, response) {
                 if (error) { throw new Error(error) };
                 devices = JSON.parse(response.body);
                 console.log(devices["tailf-ncs:devices"]);
@@ -40,7 +40,7 @@ module.exports = {
     showTest: (req, res) => {
         res.render('../views/nso/test', { title: 'Test creación NSO' });
     },
-    test: async(req, res) => {
+    test: async (req, res) => {
         var request = require('request');
         var options = {
             'method': 'PATCH',
@@ -53,10 +53,34 @@ module.exports = {
             body: JSON.stringify({ "tailf-ned-cisco-ios-xr:Loopback": { "id": req.body.id, "ipv4": { "address": { "ip": req.body.ip, "mask": req.body.mask } } } })
 
         };
-        request(options, function(error, response) {
+        request(options, function (error, response) {
             if (error) throw new Error(error);
             console.log(response.body);
         });
         res.send('Se configuro Correctamente.')
+    },
+    segmentRouting: async (req, res) => {
+        var request = require('request');
+        var respuesta = ""
+        var options = {
+            "rejectUnauthorized": false,
+            'method': 'POST',
+            'url': 'https://nso.claro.amx/restconf/data/devices/device=SF903-PE-03/live-status/exec/display',
+            'headers': {
+                'Accept': 'application/yang-data+json',
+                'Content-Type': 'application/yang-data+json',
+                'Authorization': 'Basic Y3RpNzk1MjpDcjBzc1cwcmsi'
+            },
+            body: JSON.stringify({
+                "args": "segment-routing prefix mpls forwarding"
+            })
+        };
+        request(options, function (error, response) {
+            if (error) throw new Error(error);
+            respuesta = JSON.parse(response.body)
+            console.log(respuesta['tailf-ned-huawei-vrp-stats:output'].result)
+            res.render('../views/nso/segmentRouting', { title: 'Estado Servicios CORE', respuesta: respuesta['tailf-ned-huawei-vrp-stats:output'].result });
+        });
+        
     }
 }
