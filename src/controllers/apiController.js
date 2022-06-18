@@ -114,25 +114,30 @@ module.exports = {
                     headerStyle: styles.headerDark,
                     width: 110 // <- width in pixels
                 },
-                capacidadPuerto: {
-                    displayName: 'Capacidad Puerto',
-                    headerStyle: styles.headerDark,
-                    width: 145 // <- width in pixels
-                },
                 bandwidth: {
                     displayName: 'Bandwidth',
                     headerStyle: styles.headerDark,
                     width: 96 // <- width in pixels
                 },
                 puertosElectricos: {
-                    displayName: 'Puertos Electricos',
+                    displayName: 'Electricos',
                     headerStyle: styles.headerDark,
-                    width: 153 // <- width in pixels
+                    width: 96 // <- width in pixels
                 },
-                puertosOpticos: {
-                    displayName: 'Puertos Opticos',
+                puertosOpticos1gb: {
+                    displayName: 'Ópticos 1Gb',
                     headerStyle: styles.headerDark,
-                    width: 153 // <- width in pixels
+                    width: 96 // <- width in pixels
+                },
+                puertosOpticos10gb: {
+                    displayName: 'Ópticos 10Gb',
+                    headerStyle: styles.headerDark,
+                    width: 96 // <- width in pixels
+                },
+                puertosOpticos100gb: {
+                    displayName: 'Ópticos 100Gb',
+                    headerStyle: styles.headerDark,
+                    width: 96 // <- width in pixels
                 },
                 fechaObjetivo: {
                     displayName: 'Fecha Objetivo',
