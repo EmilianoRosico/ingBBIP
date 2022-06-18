@@ -30,10 +30,6 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.STRING(45),
             allowNull: false
         },
-        capacidadPuerto: {
-            type: dataTypes.STRING(45),
-            allowNull: false
-        },
         bandwidth: {
             type: dataTypes.STRING(45),
             allowNull: false
@@ -42,7 +38,15 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
-        puertosOpticos: {
+        puertosOpticos1gb: {
+            type: dataTypes.INTEGER.UNSIGNED,
+            allowNull: false
+        },
+        puertosOpticos10gb: {
+            type: dataTypes.INTEGER.UNSIGNED,
+            allowNull: false
+        },
+        puertosOpticos100gb: {
             type: dataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
