@@ -33,8 +33,9 @@ module.exports = {
                 redundancia: req.body.redundancia,
                 bandwidth: req.body.bandwidth,
                 puertosElectricos: req.body.puertosElectricos,
-                puertosOpticos: req.body.puertosOpticos,
-                capacidadPuerto: req.body.capacidadPuerto,
+                puertosOpticos1gb: req.body.puertosOpticos1gb,
+                puertosOpticos10gb: req.body.puertosOpticos10gb,
+                puertosOpticos100gb: req.body.puertosOpticos100gb,
                 comentarios: req.body.comentarios,
             })
             res.redirect('/capex');
@@ -45,7 +46,7 @@ module.exports = {
     },
     editGet: async (req, res) => {
         try {
-            const solicitud = await db.capexs.findOne({ where: {id:req.params.id, solicitante: res.locals.user } })
+            const solicitud = await db.capexs.findOne({ where: { id: req.params.id, solicitante: res.locals.user } })
             if (solicitud != null) {
                 res.render('../views/capex/editCapex', { title: `Solicitud ${req.params.id}`, solicitud: solicitud });
             } else {
@@ -57,7 +58,7 @@ module.exports = {
     },
     editPost: async (req, res) => {
         try {
-            const solicitud = await db.capexs.findOne({ where: {id:req.params.id, solicitante: res.locals.user } })
+            const solicitud = await db.capexs.findOne({ where: { id: req.params.id, solicitante: res.locals.user } })
             if (solicitud != null) {
                 await db.capexs.update({
                     solicitante: res.locals.user,
@@ -69,8 +70,9 @@ module.exports = {
                     redundancia: req.body.redundancia,
                     bandwidth: req.body.bandwidth,
                     puertosElectricos: req.body.puertosElectricos,
-                    puertosOpticos: req.body.puertosOpticos,
-                    capacidadPuerto: req.body.capacidadPuerto,
+                    puertosOpticos1gb: req.body.puertosOpticos1gb,
+                    puertosOpticos10gb: req.body.puertosOpticos10gb,
+                    puertosOpticos100gb: req.body.puertosOpticos100gb,
                     comentarios: req.body.comentarios,
                 }, {
                     where: { id: req.params.id }

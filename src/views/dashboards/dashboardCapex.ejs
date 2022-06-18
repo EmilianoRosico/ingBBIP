@@ -15,32 +15,6 @@
         <!-- Content Row -->
         <div class="row">
           <div class="col-md-3 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-              <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                  <div class="col mr-2">
-                    <div
-                      class="
-                        text-xs
-                        font-weight-bold
-                        text-primary text-uppercase
-                        mb-1
-                      "
-                    >
-                      Solicitudes
-                    </div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800" id="solicitudes">
-                      Loading...
-                    </div>
-                  </div>
-                  <div class="col-auto">
-                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3 mb-4">
             <div class="card border-left-success shadow h-100 py-2">
               <div class="card-body">
                 <div class="row no-gutters align-items-center">
@@ -53,10 +27,10 @@
                         mb-1
                       "
                     >
-                      Puertos Eléctricos
+                      Eléctricos
                     </div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800" id="puertosElectricos">
-                      Loading...
+                      <%= puertosElectricos %>
                     </div>
                   </div>
                   <div class="col-auto">
@@ -79,10 +53,10 @@
                         mb-1
                       "
                     >
-                      Puertos Ópticos 10G
+                      Ópticos 1G
                     </div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800" id="puertosOpticos10">
-                      Loading...
+                      <%= puertosOpticos1gb %>
                     </div>
                   </div>
                   <div class="col-auto">
@@ -105,10 +79,36 @@
                         mb-1
                       "
                     >
-                      Puertos Ópticos 100G
+                      Ópticos 10G
+                    </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800" id="puertosOpticos10">
+                      <%= puertosOpticos10gb %>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-compress fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div
+                      class="
+                        text-xs
+                        font-weight-bold
+                        text-warning text-uppercase
+                        mb-1
+                      "
+                    >
+                      Ópticos 100G
                     </div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800" id="puertosOpticos100">
-                      Loading...
+                      <%= puertosOpticos100gb %>
                     </div>
                   </div>
                   <div class="col-auto">
@@ -119,7 +119,6 @@
             </div>
           </div>
         </div>
-
         <!-- Content Row -->
         <div class="row">
           <div class="col-lg-6 mb-4">
@@ -155,6 +154,34 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-3 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div
+                      class="
+                        text-xs
+                        font-weight-bold
+                        text-primary text-uppercase
+                        mb-1
+                      "
+                    >
+                      Solicitudes
+                    </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800" id="solicitudes">
+                      Loading...
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="container min-height">
           <table class="table table-hover">
             <thead>
@@ -164,8 +191,10 @@
                 <th>Título proyecto</th>
                 <th>CellID</th>
                 <th>Solicitante</th>
-                <th>Puertos eléctricos</th>
-                <th>Puertos ópticos</th>
+                <th>Eléctricos</th>
+                <th>Ópticos 1Gb</th>
+                <th>Ópticos 10Gb</th>
+                <th>Ópticos 100Gb</th>
                 <th>Fecha objetivo</th>
               </tr>
             </thead>
@@ -180,7 +209,9 @@
                 <td><%= element.cellId %></td>
                 <td><%= element.solicitante %></td>
                 <td><%= element.puertosElectricos %></td>
-                <td><%= element.puertosOpticos %></td>
+                <td><%= element.puertosOpticos1gb %></td>
+                <td><%= element.puertosOpticos10gb %></td>
+                <td><%= element.puertosOpticos100gb %></td>
                 <td><%= element.fechaObjetivo %></td>
               </tr>
               <%});%>

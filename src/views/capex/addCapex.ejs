@@ -176,6 +176,7 @@
           <option value="TME298">TME298</option>
           <option value="TS1001">TS1001</option>
           <option value="TU001">TU001</option>
+          <option value="No-BBIP">Otro</option>
         </select>
         <div class="invalid-feedback">
           Por favor ingresa el cell id del nodo.
@@ -213,7 +214,7 @@
       </div>
       <div class="col-md-2">
         <label for="bandwidth" class="form-label"
-          >Ancho de banda total requerido</label
+          >Ancho de banda requerido</label
         >
         <input
           type="text"
@@ -249,37 +250,45 @@
         </div>
       </div>
       <div class="col-md-2">
-        <label for="puertosOpticos" class="form-label">Puertos ópticos</label>
+        <label for="puertosOpticos1gb" class="form-label">Puertos ópticos 1Gb</label>
         <input
           type="number"
           class="form-control"
-          id="puertosOpticos"
-          name="puertosOpticos"
+          id="puertosOpticos1gb"
+          name="puertosOpticos1gb"
           placeholder="5"
           required
         />
         <div class="invalid-feedback">
-          Por favor ingresa el total de puertos ópticos.
+          Por favor ingresa el total de puertos ópticos de 1Gb.
+        </div>
+      </div>
+            <div class="col-md-2">
+        <label for="puertosOpticos10gb" class="form-label">Puertos ópticos 10Gb</label>
+        <input
+          type="number"
+          class="form-control"
+          id="puertosOpticos10gb"
+          name="puertosOpticos10gb"
+          placeholder="5"
+          required
+        />
+        <div class="invalid-feedback">
+          Por favor ingresa el total de puertos ópticos de 10Gb.
         </div>
       </div>
       <div class="col-md-2">
-        <label for="capacidadPuerto" class="form-label"
-          >Capacidad puertos ópticos</label
-        >
-        <select
-          class="form-select"
-          id="capacidadPuerto"
-          name="capacidadPuerto"
+        <label for="puertosOpticos100gb" class="form-label">Puertos ópticos 100Gb</label>
+        <input
+          type="number"
+          class="form-control"
+          id="puertosOpticos100gb"
+          name="puertosOpticos100gb"
+          placeholder="5"
           required
-        >
-          <option selected disabled value="">Elija...</option>
-          <option value="1Gb">1Gb</option>
-          <option value="10Gb">10Gb</option>
-          <option value="100Gb">100Gb</option>
-          <option value="N/A">N/A</option>
-        </select>
+        />
         <div class="invalid-feedback">
-          Por favor indique la capacidad de los puertos ópticos.
+          Por favor ingresa el total de puertos ópticos de 100Gb.
         </div>
       </div>
       <p>

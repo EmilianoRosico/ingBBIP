@@ -2,26 +2,9 @@ fetch('/api/capexData').then((response) => {
     return response.json()
 }).then(function (json) {
     let data = json;
-    let puertosElectricos = 0
-    let puertosOpticos1 = 0
-    let puertosOpticos10 = 0
-    let puertosOpticos100 = 0
     let solicitudPorNodo = []
     let solicitudPorArea = []
     data.forEach(element => {
-        puertosElectricos += element.puertosElectricos
-        if (element.puertosOpticos != 0) {
-            if (element.capacidadPuerto == "1Gb") {
-                puertosOpticos1 += element.puertosOpticos;
-            }
-            else if (element.capacidadPuerto == "10Gb") {
-                puertosOpticos10 += element.puertosOpticos;
-
-            }
-            else if (element.capacidadPuerto == "100Gb") {
-                puertosOpticos100 += element.puertosOpticos;
-            }
-        }
         solicitudPorNodo.push(element.cellId)
         solicitudPorArea.push(element.areaSolicitante)
 
@@ -50,9 +33,7 @@ fetch('/api/capexData').then((response) => {
         areas[area] = areas[area] ? areas[area] + 1 : 1;
     }
     document.querySelector('#solicitudes').innerText = data.length
-    document.querySelector('#puertosElectricos').innerText = puertosElectricos
-    document.querySelector('#puertosOpticos10').innerText = puertosOpticos10
-    document.querySelector('#puertosOpticos100').innerText = puertosOpticos100
+
 
     Object.entries(nodos).forEach(entry => {
         const [key, value] = entry;

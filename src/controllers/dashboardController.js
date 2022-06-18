@@ -23,14 +23,18 @@ module.exports = {
             ]
         })
         const puertosElectricos = await db.capexs.sum('puertosElectricos')
-        const puertosOpticos = await db.capexs.sum('puertosOpticos')
+        const puertosOpticos1gb = await db.capexs.sum('puertosOpticos1gb')
+        const puertosOpticos10gb = await db.capexs.sum('puertosOpticos10gb')
+        const puertosOpticos100gb = await db.capexs.sum('puertosOpticos100gb')
         res.render('../views/dashboards/dashboardCapex', {
             title: 'Dashboard',
             solicitud: solicitud,
             nodos: nodos,
             areas: areas,
             puertosElectricos: puertosElectricos,
-            puertosOpticos: puertosOpticos
+            puertosOpticos1gb: puertosOpticos1gb,
+            puertosOpticos10gb: puertosOpticos10gb,
+            puertosOpticos100gb: puertosOpticos100gb,
         });
     },
     detail: async(req, res) => {
@@ -54,8 +58,9 @@ module.exports = {
                 redundancia: req.body.redundancia,
                 bandwidth: req.body.bandwidth,
                 puertosElectricos: req.body.puertosElectricos,
-                puertosOpticos: req.body.puertosOpticos,
-                capacidadPuerto: req.body.capacidadPuerto,
+                puertosOpticos1gb: req.body.puertosOpticos1gb,
+                puertosOpticos10gb: req.body.puertosOpticos10gb,
+                puertosOpticos100gb: req.body.puertosOpticos100gb,
                 comentarios: req.body.comentarios,
             })
             res.redirect('/capex/capex');

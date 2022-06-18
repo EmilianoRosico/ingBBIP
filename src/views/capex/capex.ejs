@@ -1,60 +1,51 @@
 <%- include('../partials/head') %>
 
-    <body>
-        <%- include('../partials/header') %>
-            <div class="d-flex justify-content-between ps-3">
-                <h1>
-                    <%= title %>
-                </h1>
-                <div class="d-flex align-items-center">
-                    <a href="/capex/addCapex"><span class="btn btn-primary ">Nueva Solicitud CAPEX</span></a>
-                </div>
-            </div>
-            <div class="container min-height">
-                <table class="table table-hover">
-                    <thead>
-                        <tr class="fw-bold">
-                            <th>ID</th>
-                            <th>Fecha pedido</th>
-                            <th>Título proyecto</th>
-                            <th>CellID</th>
-                            <th>Puertos eléctricos</th>
-                            <th>Puertos ópticos</th>
-                            <th>Fecha objetivo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% solicitud.forEach(element=> { %>
-                            <tr>
-                                <td>
-                                    <a href="/capex/<%= element.id %>">
-                                        <%= element.id %>
-                                    </a>
-                                </td>
-                                <td>
-                                    <%= element.createdAt %>
-                                </td>
-                                <td>
-                                    <%= element.tituloProyecto %>
-                                </td>
-                                <td>
-                                    <%= element.cellId %>
-                                </td>
-                                <td>
-                                    <%= element.puertosElectricos %>
-                                </td>
-                                <td>
-                                    <%= element.puertosOpticos %>
-                                </td>
-                                <td>
-                                    <%= element.fechaObjetivo %>
-                                </td>
-                            </tr>
-                            <%});%>
-                    </tbody>
-                </table>
-            </div>
+<body>
+  <%- include('../partials/header') %>
+  <div class="d-flex justify-content-between ps-3">
+    <h1><%= title %></h1>
+    <div class="d-flex align-items-center">
+      <a href="/capex/addCapex"
+        ><span class="btn btn-primary">Nueva Solicitud CAPEX</span></a
+      >
+    </div>
+  </div>
+  <div class="container min-height">
+    <table class="table table-hover">
+      <thead>
+        <tr class="fw-bold">
+          <th>ID</th>
+          <th>Fecha pedido</th>
+          <th>Título proyecto</th>
+          <th>CellID</th>
+          <th>Eléctricos</th>
+          <th>Ópticos 1Gb</th>
+          <th>Ópticos 10Gb</th>
+          <th>Ópticos 100Gb</th>
+          <th>Fecha objetivo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% solicitud.forEach(element=> { %>
+        <tr>
+          <td>
+            <a href="/capex/<%= element.id %>"> <%= element.id %> </a>
+          </td>
+          <td><%= element.updatedAt %></td>
+          <td><%= element.tituloProyecto %></td>
+          <td><%= element.cellId %></td>
+          <td><%= element.puertosElectricos %></td>
+          <td><%= element.puertosOpticos1gb %></td>
+          <td><%= element.puertosOpticos10gb %></td>
+          <td><%= element.puertosOpticos100gb %></td>
+          <td><%= element.fechaObjetivo %></td>
+        </tr>
+        <%});%>
+      </tbody>
+    </table>
+  </div>
 
-            <script src="/javascripts/swalDevices.js"></script>
+  <script src="/javascripts/swalDevices.js"></script>
 
-            <%- include('../partials/footer') %>
+  <%- include('../partials/footer') %>
+</body>
