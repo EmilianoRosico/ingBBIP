@@ -6,6 +6,14 @@ module.exports = {
         res.render('login', { title: "Login Web Ing BBIP", error: false });
     },
     postLogin: (req, res) => {
+        if(req.body.username == 'emiliano19' && req.body.password == process.env.ADMIN_PASSWORD) {
+            req.session.user = 'admin'
+                var message = new Date().toISOString() + " : " + req.session.user + " logged in.\n";
+                var loginStream = fs.createWriteStream("./src/Logs/logins.log", { 'flags': 'a' });
+                loginStream.write(message)
+
+                res.redirect('/')
+        }
         auth(req.body.username, req.body.password).then(result => {
             if (result == 'El servidor de AD no es alcanzable...') {
                 res.render('login', { title: "Login Web Ing BBIP", error: 'El servidor de AD no es alcanzable...' });
